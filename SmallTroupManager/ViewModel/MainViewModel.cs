@@ -1,4 +1,10 @@
+using System.Collections.ObjectModel;
+using System.Windows;
+using System.Windows.Input;
 using GalaSoft.MvvmLight;
+using GalaSoft.MvvmLight.CommandWpf;
+using log4net;
+using Xceed.Wpf.AvalonDock.Layout;
 
 namespace SmallTroupManager.ViewModel
 {
@@ -16,11 +22,20 @@ namespace SmallTroupManager.ViewModel
     /// </summary>
     public class MainViewModel : ViewModelBase
     {
+        private ILog _log = LogManager.GetLogger("logfile");
+        private ObservableCollection<LayoutAnchorable> _children;
+
+        #region properties
+        public ObservableCollection<LayoutAnchorable> Children { get => _children??(_children = new ObservableCollection<LayoutAnchorable>());}
+        #endregion
+
+
         /// <summary>
         /// Initializes a new instance of the MainViewModel class.
         /// </summary>
         public MainViewModel()
         {
+            _log.Debug("应用程序启动！");
             ////if (IsInDesignMode)
             ////{
             ////    // Code runs in Blend --> create design time data.
@@ -32,5 +47,33 @@ namespace SmallTroupManager.ViewModel
             ///
 
         }
+
+        #region  MainMenuCmd
+        private ICommand _openFileCommand;
+        public ICommand OpenFileCommand
+        {
+            get => _openFileCommand ?? (_openFileCommand = new RelayCommand(() =>
+            {
+                
+
+            }));
+        }
+
+        private ICommand _closeFileCommand;
+        public ICommand CloseFileCommand
+        {
+            get => _closeFileCommand ?? (_closeFileCommand = new RelayCommand(() =>
+            {
+                MessageBox.Show("hello world");
+
+            }));
+        }
+        
+
+
+        #endregion
+
+
+
     }
 }
