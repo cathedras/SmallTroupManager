@@ -23,14 +23,21 @@
         <Menu Grid.Column="0" Grid.Row="0">
             <MenuItem Header="文件" Width="70">
                 <MenuItem Header="打开演出文件" Command="{Binding Source={StaticResource Locator},Path=Main.OpenFileCommand}"></MenuItem>
+                <MenuItem Header="保存演出文件" Command="{Binding Source={StaticResource Locator},Path=Main.SaveFileCommand}"></MenuItem>
                 <MenuItem Header="关闭演出文件" Command="{Binding Source={StaticResource Locator},Path=Main.CloseFileCommand}"></MenuItem>
             </MenuItem>
             <MenuItem Header="程序" Width="70">
-                <MenuItem Header="新建演出" Command="{Binding Source={StaticResource  Locator}}"></MenuItem>
+                <MenuItem Header="新建演出" Command="{Binding Source={StaticResource  Locator},Path=Main.NewActionCommand}"></MenuItem>
                 <MenuItem Header="添加">
-                    <MenuItem Header="表演" Command="{Binding Source={StaticResource  Locator}}"></MenuItem>
+                    <MenuItem Header="表演" Command="{Binding Source={StaticResource  Locator},Path=Main.AddActionCommand}"></MenuItem>
                     <MenuItem Header="设备" Command="{Binding Source={StaticResource  Locator}}"></MenuItem>
                     <MenuItem Header="播放程序" Command="{Binding Source={StaticResource  Locator}}"></MenuItem>
+                </MenuItem>
+                <Separator></Separator>
+                <MenuItem Header="视图">
+                    <MenuItem Header="列表视图"></MenuItem>
+                    <MenuItem Header="图标视图"></MenuItem>
+                    <MenuItem Header="简要视图"></MenuItem>
                 </MenuItem>
             </MenuItem>
             <MenuItem Header="工具" Width="70">
@@ -49,11 +56,7 @@
         <avaDock:DockingManager x:Name="DockingManager" Grid.Column="0" Grid.Row="2" Background="AliceBlue">
             <avaDock:LayoutRoot>
                 <avaDock:LayoutPanel Orientation="Vertical">
-                    <avaDock:LayoutDocumentPane ><!--Children="{Binding Source={StaticResource Locator},Path=Main.Children}"-->
-                        <!--<avaDock:LayoutAnchorable Title="sample">
-                            <userControl:UserControl1></userControl:UserControl1>
-                        </avaDock:LayoutAnchorable>-->
-                    </avaDock:LayoutDocumentPane>
+                    <avaDock:LayoutDocumentPane x:Name="DocumentPane" PropertyChanged="DocumentPane_OnPropertyChanged"/>
                 </avaDock:LayoutPanel>
             </avaDock:LayoutRoot>
         </avaDock:DockingManager>

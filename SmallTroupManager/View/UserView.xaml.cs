@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using SmallTroupManager.Model;
 
 namespace SmallTroupManager.View
 {
@@ -23,6 +25,16 @@ namespace SmallTroupManager.View
         public UserControl1()
         {
             InitializeComponent();
+        }
+        private ObservableCollection<RepertoireItem> _targetItems;
+        public ObservableCollection<RepertoireItem> TargetItems
+        {
+            get => _targetItems??(_targetItems=new ObservableCollection<RepertoireItem>());
+        }
+
+        private void Selector_OnSelected(object sender, RoutedEventArgs e)
+        {
+            
         }
     }
 }

@@ -67,6 +67,15 @@
     <Reference Include="System.Xaml">
       <RequiredTargetFramework>4.0</RequiredTargetFramework>
     </Reference>
+    <Reference Include="Vlc.DotNet.Core, Version=3.0.0.0, Culture=neutral, PublicKeyToken=84529da31f4eb963, processorArchitecture=MSIL">
+      <HintPath>..\packages\Vlc.DotNet.Core.3.0.0\lib\net45\Vlc.DotNet.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Vlc.DotNet.Core.Interops, Version=3.0.0.0, Culture=neutral, PublicKeyToken=84529da31f4eb963, processorArchitecture=MSIL">
+      <HintPath>..\packages\Vlc.DotNet.Core.Interops.3.0.0\lib\net45\Vlc.DotNet.Core.Interops.dll</HintPath>
+    </Reference>
+    <Reference Include="Vlc.DotNet.Wpf, Version=3.0.0.0, Culture=neutral, PublicKeyToken=84529da31f4eb963, processorArchitecture=MSIL">
+      <HintPath>..\packages\Vlc.DotNet.Wpf.3.0.0\lib\net45\Vlc.DotNet.Wpf.dll</HintPath>
+    </Reference>
     <Reference Include="WindowsBase" />
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
@@ -80,11 +89,19 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Model\RepertoireItem.cs" />
+    <Compile Include="ViewModel\ActionInfoViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
+    <Compile Include="ViewModel\PlayMusicViewModel.cs" />
     <Compile Include="ViewModel\UserViewModel.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
+    <Compile Include="View\PlayMusicWin.xaml.cs">
+      <DependentUpon>PlayMusicWin.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\UserView.xaml.cs">
       <DependentUpon>UserView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\ActionInfo.xaml.cs">
+      <DependentUpon>ActionInfo.xaml</DependentUpon>
     </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -98,7 +115,15 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="View\PlayMusicWin.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\UserView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\ActionInfo.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

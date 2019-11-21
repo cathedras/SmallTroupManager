@@ -4,20 +4,22 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:SmallTroupManager.View"
+             xmlns:vmodel="clr-namespace:SmallTroupManager.ViewModel"
              xmlns:locator ="clr-namespace:CommonServiceLocator;assembly=CommonServiceLocator"
+
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
-        <ListView ItemsSource="{Binding }">
+        <ListView ItemsSource="{Binding RelativeSource={RelativeSource AncestorType=local:UserControl1,AncestorLevel=1},Path=TargetItems}" FontSize="18" Selected="Selector_OnSelected">
             <ListView.View>
                 <GridView>
-                    <GridViewColumn Header="表演顺序" Width="100"></GridViewColumn>
-                    <GridViewColumn Header="表演名称" Width="100"></GridViewColumn>
-                    <GridViewColumn Header="表演时长" Width="100"></GridViewColumn>
-                    <GridViewColumn Header="表演者" Width="100"></GridViewColumn>
-                    <GridViewColumn Header="背景音乐" Width="100"></GridViewColumn>
-                    <GridViewColumn Header="资源地址" Width="100"></GridViewColumn>
-                    <GridViewColumn Header="资源播放程序" Width="100"></GridViewColumn>
+                    <GridViewColumn Header="表演顺序" Width="100" DisplayMemberBinding="{Binding Order}"></GridViewColumn>
+                    <GridViewColumn Header="表演名称" Width="100" DisplayMemberBinding="{Binding RepName}"></GridViewColumn>
+                    <GridViewColumn Header="表演时长" Width="100" DisplayMemberBinding="{Binding RepTime}"></GridViewColumn>
+                    <GridViewColumn Header="表演者" Width="100" DisplayMemberBinding="{Binding ActName}"></GridViewColumn>
+                    <GridViewColumn Header="背景音乐" Width="100" DisplayMemberBinding="{Binding RepBgm}"></GridViewColumn>
+                    <GridViewColumn Header="资源地址" Width="100" DisplayMemberBinding="{Binding FileRes}"></GridViewColumn>
+                    <GridViewColumn Header="资源播放程序" Width="150" DisplayMemberBinding="{Binding ProgType}"></GridViewColumn>
                 </GridView>
             </ListView.View>
         </ListView>

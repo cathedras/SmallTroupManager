@@ -1,0 +1,22 @@
+﻿<Window x:Class="SmallTroupManager.View.PlayMusicWin"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:SmallTroupManager.View"
+        xmlns:vlc="clr-namespace:Vlc;assembly=Vlc.DotNet.Wpf"
+        xmlns:vlccore="clr-namespace:Vlc;assembly=Vlc.DotNet.Core"
+        mc:Ignorable="d"
+        Title="PlayMusicWin" Height="450" Width="800">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+            <ColumnDefinition Width="Auto"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+        </Grid.RowDefinitions>
+        
+    </Grid>
+</Window>

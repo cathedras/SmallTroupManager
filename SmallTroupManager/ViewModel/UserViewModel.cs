@@ -11,14 +11,13 @@ namespace SmallTroupManager.ViewModel
 {
     public class UserViewModel: ViewModelBase
     {
-        private ObservableCollection<RepertoireItem> targetItems;
-
+       
         public UserViewModel()
         {
-            targetItems.Add(new RepertoireItem(1,"红动中国","4'32''","mi","红动中国","c:\\sdsda.mp3","local"));
+            
         }
 
-        public ObservableCollection<RepertoireItem> TargetItems { get => targetItems ?? (targetItems = new ObservableCollection<RepertoireItem>()); }
+       
 
 
 
