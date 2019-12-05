@@ -4,22 +4,55 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:SmallTroupManager.View"
-             xmlns:vmodel="clr-namespace:SmallTroupManager.ViewModel"
-             xmlns:locator ="clr-namespace:CommonServiceLocator;assembly=CommonServiceLocator"
-
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+             xmlns:util="clr-namespace:ElCommon.Util;assembly=Util"
+             xmlns:res="clr-namespace:SmallTroupManager.Resources"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
+             d:DesignHeight="450" d:DesignWidth="900">
+    <Control.Resources>
+       <ResourceDictionary Source="../Resources/ListColItemResource.xaml"></ResourceDictionary>
+    </Control.Resources>
+
     <Grid>
-        <ListView ItemsSource="{Binding RelativeSource={RelativeSource AncestorType=local:UserControl1,AncestorLevel=1},Path=TargetItems}" FontSize="18" Selected="Selector_OnSelected">
+        <ListView ItemsSource="{Binding RelativeSource={RelativeSource AncestorType=local:UserControl1,AncestorLevel=1},Path=TargetItems}" 
+                  KeyDown="ListItemView_OnKeyDown"
+                  MouseDoubleClick="ListItemView_OnMouseDoubleClick" 
+                  MouseDown="ListItemView_OnMouseDown"
+                  SelectedItem="{Binding RelativeSource={RelativeSource Mode=FindAncestor,AncestorType=local:UserControl1},Path=CurSelect,UpdateSourceTrigger=PropertyChanged}"
+                  SelectionMode="Extended"
+                  SelectedIndex="{Binding RelativeSource={RelativeSource Mode=FindAncestor,AncestorType=local:UserControl1},Path=CurSelectIndex,UpdateSourceTrigger=PropertyChanged}"
+                  x:Name="ListItemView" FontSize="18"
+                  >
+             <!--MouseDoubleClick="ListItemView_OnMouseDoubleClick" MouseDown="ListItemView_OnMouseDown"-->
+            <!--<i:Interaction.Triggers>
+                <i:EventTrigger EventName="MouseDoubleClick">
+                    <util:ExInvokeCommandAction Command="{Binding Source={StaticResource Locator},Path=VModel.SelectCommand}" CommandParameter="{Binding ElementName=ListItemView,Path=SelectedItem}"></util:ExInvokeCommandAction>--><!----><!--
+                </i:EventTrigger>
+                <i:EventTrigger EventName="KeyDown">
+                    <util:ExInvokeCommandAction Command="{Binding Source={StaticResource Locator},Path=VModel.KeyCommand}" CommandParameter="{Binding ElementName=ListItemView,Path=SelectedItem}"></util:ExInvokeCommandAction>
+                </i:EventTrigger>
+            </i:Interaction.Triggers>-->
             <ListView.View>
                 <GridView>
-                    <GridViewColumn Header="表演顺序" Width="100" DisplayMemberBinding="{Binding Order}"></GridViewColumn>
-                    <GridViewColumn Header="表演名称" Width="100" DisplayMemberBinding="{Binding RepName}"></GridViewColumn>
-                    <GridViewColumn Header="表演时长" Width="100" DisplayMemberBinding="{Binding RepTime}"></GridViewColumn>
-                    <GridViewColumn Header="表演者" Width="100" DisplayMemberBinding="{Binding ActName}"></GridViewColumn>
-                    <GridViewColumn Header="背景音乐" Width="100" DisplayMemberBinding="{Binding RepBgm}"></GridViewColumn>
-                    <GridViewColumn Header="资源地址" Width="100" DisplayMemberBinding="{Binding FileRes}"></GridViewColumn>
-                    <GridViewColumn Header="资源播放程序" Width="150" DisplayMemberBinding="{Binding ProgType}"></GridViewColumn>
+                    <GridViewColumn Header="表演顺序" Width="100" CellTemplateSelector="{StaticResource OrderTemplate}"></GridViewColumn>
+                    <GridViewColumn Header="表演名称" Width="100" CellTemplateSelector="{StaticResource RepNameTemplate}"></GridViewColumn>
+                    <GridViewColumn Header="表演时长" Width="100" CellTemplateSelector="{StaticResource RepTimeTemplate}"></GridViewColumn>
+                    <GridViewColumn Header="表演者" Width="100" CellTemplateSelector="{StaticResource ActNameTemplate}"></GridViewColumn>
+                    <GridViewColumn Header="背景音乐" Width="100" CellTemplateSelector="{StaticResource RepBgmTemplate}"></GridViewColumn>
+                    <GridViewColumn Header="资源地址" Width="100" CellTemplateSelector="{StaticResource FileResTemplate}"></GridViewColumn>
+                    <GridViewColumn Header="资源播放程序" Width="150" CellTemplateSelector="{StaticResource ProgTypeTemplate}"></GridViewColumn>
+                    <GridViewColumn Header="操作" Width="150">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <WrapPanel>
+                                    <!--<res:ButtonEx Content="删除" Icon="/Resources/play.png" Margin="10" ButtonType="IconText"/>-->
+                                    <Button Template="{StaticResource ButtonControlTemplate1}" Width="30" Height="30" Visibility="Visible" Margin="20,0,0,0"></Button>
+                                    <Button Template="{StaticResource ButtonControlTemplate2}" Width="30" Height="30" Visibility="Collapsed" Margin="20,0,0,0"></Button>
+                                    <Button Template="{StaticResource ButtonControlTemplate3}" Width="30" Height="30" Margin="20,0,0,0"></Button>
+                                </WrapPanel>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
                 </GridView>
             </ListView.View>
         </ListView>

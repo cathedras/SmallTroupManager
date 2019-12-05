@@ -1,14 +1,18 @@
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Input;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.CommandWpf;
 using log4net;
 using Microsoft.Win32;
 using SmallTroupManager.Model;
+using SmallTroupManager.Utils;
 using SmallTroupManager.View;
 using Xceed.Wpf.AvalonDock.Layout;
+//using System.Reflection;
 
 namespace SmallTroupManager.ViewModel
 {
@@ -29,6 +33,12 @@ namespace SmallTroupManager.ViewModel
         private ILog _log = LogManager.GetLogger("logfile");
         private LayoutDocumentPane _documentPaneView;
         private int _selectedIndex;
+        private Gbl _gbl;
+#if DEBUG
+        private string _testMovieOne = "F:\\wpf\\SmallTroupManager\\TestData\\Video\\Rescue Emergency.mp4";
+        private string _testMovieTwo = "F:\\wpf\\SmallTroupManager\\TestData\\Video\\war of future.mp4";
+#endif
+
 
         #region properties
         public int SelectedIndex { get => _selectedIndex; set => _selectedIndex = value; }
@@ -48,6 +58,8 @@ namespace SmallTroupManager.ViewModel
         public MainViewModel()
         {
             _log.Debug("应用程序启动！");
+            _gbl = new Gbl();
+            _gbl.LoadGbl<Gbl>("SMT.ini");
             ////if (IsInDesignMode)
             ////{
             ////    // Code runs in Blend --> create design time data.
@@ -61,14 +73,23 @@ namespace SmallTroupManager.ViewModel
         }
 
         #region 通用Function
-       
+
+        public int id = 1;
+        public RepertoireItem curAdd;
         public void AddAActionFile()
         {
             var la = new LayoutAnchorable();
             la.CanClose = true;
             la.Title = "Sample";
-            la.Content = new UserControl1();
+            var uc = new UserControl1();
+            curAdd = new RepertoireItem(id++, string.Empty, string.Empty, string.Empty, string.Empty, string.Empty, string.Empty,
+                State.Edit);
+            uc.TargetItems.Add(curAdd);//默认添加一个
+            var s = uc.TargetItems.Count;
+           
+            la.Content = uc;
             DocumentPaneView.Children.Add(la);
+            uc.ListItemView.SelectedIndex = s-1;
         }
 
         #endregion
@@ -92,8 +113,10 @@ namespace SmallTroupManager.ViewModel
         {
             get => _closeFileCommand ?? (_closeFileCommand = new RelayCommand(() =>
             {
-                
-
+                var playLst = new List<string>();
+                playLst.Add(_testMovieOne);
+                playLst.Add(_testMovieTwo);
+                App.Locator.PlayM.InitShow(playLst);
             }));
         }
 
@@ -102,7 +125,7 @@ namespace SmallTroupManager.ViewModel
         {
             get => _saveFileCommand ?? (_saveFileCommand = new RelayCommand(() =>
             {
-
+               
 
             }));
         }

@@ -119,7 +119,7 @@ namespace SmallTroupManager.ViewModel
         {
             if (isAdd)
             {
-                _actItem = new RepertoireItem(_order++, RepName, RepTime, ActName, RepBgm, FileRes, ProgType);
+                _actItem = new RepertoireItem(_order++, RepName, RepTime, ActName, RepBgm, FileRes, ProgType,State.Show);
                 CleanUp();
             }
             return isAdd;

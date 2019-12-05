@@ -4,8 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SmallTroupManager.View"
-        xmlns:vlc="clr-namespace:Vlc;assembly=Vlc.DotNet.Wpf"
-        xmlns:vlccore="clr-namespace:Vlc;assembly=Vlc.DotNet.Core"
+        xmlns:video="clr-namespace:VisioForge.Controls.UI.WPF;assembly=VisioForge.Controls.UI"
         mc:Ignorable="d"
         Title="PlayMusicWin" Height="450" Width="800">
     <Grid>
@@ -17,6 +16,21 @@
             <RowDefinition Height="*"></RowDefinition>
             <RowDefinition Height="Auto"></RowDefinition>
         </Grid.RowDefinitions>
-        
+        <video:MediaPlayer Grid.Column="0" Grid.Row="0" Background="Black" x:Name="VideoPlayer"></video:MediaPlayer>
+        <WrapPanel Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Height="100">
+            <Button Width="100" Height="50" Margin="5" Content="播放" Command="{Binding Source={StaticResource Locator},Path=PlayM.StartingCommand}"></Button>
+            <Button Width="100" Height="50" Margin="5" Content="暂停"></Button>
+            <Button Width="100" Height="50" Margin="5" Content="上一曲"></Button>
+            <Button Width="100" Height="50" Margin="5" Content="下一曲"></Button>
+            <Button Width="100" Height="50" Margin="5" Content="停止播放"></Button>
+        </WrapPanel>
+        <ListView Grid.Row="0" Grid.Column="1" Width="200" ItemsSource="{Binding Source={StaticResource Locator},Path=PlayM.CurList}">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="歌曲名称" Width="80" ></GridViewColumn><!--DisplayMemberBinding="{Binding}"-->
+                    <!--<GridViewColumn Header="时长" Width="50"></GridViewColumn>-->
+                </GridView>
+            </ListView.View>
+        </ListView>
     </Grid>
 </Window>
