@@ -1,0 +1,198 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:local="clr-namespace:SmallTroupManager.Resources"
+                    xmlns:model="clr-namespace:SmallTroupManager.Model">
+    <local:ListColTemp x:Key="OrderTemplate">
+        <local:ListColTemp.EditTemplate>
+            <DataTemplate  DataType="{x:Type model:RepertoireItem}">
+                <TextBlock Text="{Binding Order}" Height="25"  Width="80"></TextBlock>
+            </DataTemplate>
+        </local:ListColTemp.EditTemplate>
+        <local:ListColTemp.ShowTemplate>
+            <DataTemplate DataType="{x:Type model:RepertoireItem}">
+                <TextBlock Text="{Binding Order}" Height="25" Width="80"></TextBlock>
+            </DataTemplate>
+        </local:ListColTemp.ShowTemplate>
+    </local:ListColTemp>
+    <local:ListColTemp x:Key="RepNameTemplate">
+        <local:ListColTemp.EditTemplate>
+            <DataTemplate  DataType="{x:Type model:RepertoireItem}">
+                <TextBox Text="{Binding RepName}" Height="25"  Width="80"></TextBox>
+            </DataTemplate>
+        </local:ListColTemp.EditTemplate>
+        <local:ListColTemp.ShowTemplate>
+            <DataTemplate DataType="{x:Type model:RepertoireItem}">
+                <TextBlock Text="{Binding RepName}" Height="25" Width="80" ForceCursor="True"></TextBlock>
+            </DataTemplate>
+        </local:ListColTemp.ShowTemplate>
+    </local:ListColTemp>
+    <local:ListColTemp x:Key="RepTimeTemplate">
+        <local:ListColTemp.EditTemplate>
+            <DataTemplate  DataType="{x:Type model:RepertoireItem}">
+                <TextBox Text="{Binding RepTime}" Height="25"  Width="80"></TextBox>
+            </DataTemplate>
+        </local:ListColTemp.EditTemplate>
+        <local:ListColTemp.ShowTemplate>
+            <DataTemplate DataType="{x:Type model:RepertoireItem}">
+                <TextBlock Text="{Binding RepTime}" Height="25" Width="80"></TextBlock>
+            </DataTemplate>
+        </local:ListColTemp.ShowTemplate>
+    </local:ListColTemp>
+    <local:ListColTemp x:Key="ActNameTemplate">
+        <local:ListColTemp.EditTemplate>
+            <DataTemplate  DataType="{x:Type model:RepertoireItem}">
+                <TextBox Text="{Binding ActName}" Height="25"  Width="80"></TextBox>
+            </DataTemplate>
+        </local:ListColTemp.EditTemplate>
+        <local:ListColTemp.ShowTemplate>
+            <DataTemplate DataType="{x:Type model:RepertoireItem}">
+                <TextBlock Text="{Binding ActName}" Height="25" Width="80"></TextBlock>
+            </DataTemplate>
+        </local:ListColTemp.ShowTemplate>
+    </local:ListColTemp>
+    <local:ListColTemp x:Key="RepBgmTemplate">
+        <local:ListColTemp.EditTemplate>
+            <DataTemplate  DataType="{x:Type model:RepertoireItem}">
+                <TextBox Text="{Binding RepBgm}" Height="25"  Width="80"></TextBox>
+            </DataTemplate>
+        </local:ListColTemp.EditTemplate>
+        <local:ListColTemp.ShowTemplate>
+            <DataTemplate DataType="{x:Type model:RepertoireItem}">
+                <TextBlock Text="{Binding RepBgm}" Height="25" Width="80"></TextBlock>
+            </DataTemplate>
+        </local:ListColTemp.ShowTemplate>
+    </local:ListColTemp>
+    <local:ListColTemp x:Key="FileResTemplate">
+        <local:ListColTemp.EditTemplate>
+            <DataTemplate  DataType="{x:Type model:RepertoireItem}">
+                <TextBox Text="{Binding FileRes}" Height="25"  Width="80"></TextBox>
+            </DataTemplate>
+        </local:ListColTemp.EditTemplate>
+        <local:ListColTemp.ShowTemplate>
+            <DataTemplate DataType="{x:Type model:RepertoireItem}">
+                <TextBlock Text="{Binding FileRes}" Height="25" Width="80"></TextBlock>
+            </DataTemplate>
+        </local:ListColTemp.ShowTemplate>
+    </local:ListColTemp>
+    <local:ListColTemp x:Key="ProgTypeTemplate">
+        <local:ListColTemp.EditTemplate>
+            <DataTemplate  DataType="{x:Type model:RepertoireItem}">
+                <TextBox Text="{Binding ProgType}" Height="25"  Width="80"></TextBox>
+            </DataTemplate>
+        </local:ListColTemp.EditTemplate>
+        <local:ListColTemp.ShowTemplate>
+            <DataTemplate DataType="{x:Type model:RepertoireItem}">
+                <TextBlock Text="{Binding ProgType}" Height="25" Width="80"></TextBlock>
+            </DataTemplate>
+        </local:ListColTemp.ShowTemplate>
+    </local:ListColTemp>
+     <ControlTemplate x:Key="ButtonTemplate" TargetType="{x:Type CheckBox}">
+        <Grid>
+            <Ellipse x:Name="outCircle" Width="21.3" Height="21.3">
+                <Ellipse.Fill>
+                    <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                        <GradientStop Offset="0" Color="Transparent" />
+                    </LinearGradientBrush>
+                </Ellipse.Fill>
+            </Ellipse>
+            <Ellipse x:Name="smCircle" RenderTransformOrigin=".5,.5" Width="20" Height="20">
+                <Ellipse.RenderTransform>
+                    <ScaleTransform ScaleX=".9" ScaleY=".9"></ScaleTransform>
+                </Ellipse.RenderTransform>
+                <Ellipse.Fill>
+                    <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                        <GradientStop Offset="1" Color="Transparent" />
+                    </LinearGradientBrush>
+                </Ellipse.Fill>
+            </Ellipse>
+            
+        </Grid>
+        <ControlTemplate.Triggers>
+            <Trigger Property="IsPressed" Value="True">
+                <Setter TargetName="outCircle" Property="Fill" Value="White"></Setter>
+                <Setter TargetName="smCircle" Property="Fill" Value="Red"></Setter>
+            </Trigger>
+            <Trigger Property="IsFocused" Value="True">
+                <Setter TargetName="outCircle" Property="Fill" Value="White"></Setter>
+                <Setter TargetName="smCircle" Property="Fill" Value="Red"></Setter>
+            </Trigger>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter TargetName="outCircle" Property="Fill" Value="Transparent"></Setter>
+                <Setter TargetName="smCircle" Property="Fill" Value="Transparent"></Setter>
+            </Trigger>
+            <Trigger Property="IsChecked" Value="True">
+                <Setter TargetName="outCircle" Property="Fill" Value="White"></Setter>
+                <Setter TargetName="smCircle" Property="Fill" Value="Red"></Setter>
+            </Trigger>
+            <Trigger Property="IsChecked" Value="False">
+                <Setter TargetName="outCircle" Property="Fill" Value="Transparent"></Setter>
+                <Setter TargetName="smCircle" Property="Fill" Value="Transparent"></Setter>
+            </Trigger>
+        </ControlTemplate.Triggers>
+    </ControlTemplate>
+    <ControlTemplate x:Key="ButtonControlTemplate1" TargetType="{x:Type Button}">
+        <Grid>
+            <Polygon x:Name="ButtonPolygon" Stretch="Fill" Points="50,50 0,0 0,100" Stroke="Red" StrokeThickness="2">
+                <Polygon.Fill>
+                    <SolidColorBrush Color="Green" Opacity="0.4"/>
+                </Polygon.Fill>
+            </Polygon>
+        </Grid>
+        <ControlTemplate.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter TargetName="ButtonPolygon" Property="Fill" Value="Black"></Setter>
+            </Trigger>
+            <Trigger Property="IsPressed" Value="True">
+                <Setter TargetName="ButtonPolygon" Property="Fill" Value="Red"/>
+            </Trigger>
+        </ControlTemplate.Triggers>
+    </ControlTemplate>
+    <ControlTemplate x:Key="ButtonControlTemplate2" TargetType="{x:Type Button}">
+        <Grid>
+            <Polygon x:Name="ButtonPolygon1" Margin="0,0,20,0" Stretch="Fill" Points="10,0 0,0 0,100 10,100" Stroke="Red" StrokeThickness="2">
+                <Polygon.Fill>
+                    <SolidColorBrush Color="Green" Opacity="0.4"/>
+                </Polygon.Fill>
+            </Polygon>
+            <Polygon x:Name="ButtonPolygon2" Margin="20,0,0,0" Stretch="Fill" Points="10,0 0,0 0,100 10,100" Stroke="Red" StrokeThickness="2">
+                <Polygon.Fill>
+                    <SolidColorBrush Color="Green" Opacity="0.4"/>
+                </Polygon.Fill>
+            </Polygon>
+        </Grid>
+        <ControlTemplate.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter TargetName="ButtonPolygon1" Property="Fill" Value="Black"></Setter>
+                <Setter TargetName="ButtonPolygon2" Property="Fill" Value="Black"></Setter>
+            </Trigger>
+            <Trigger Property="IsPressed" Value="True">
+                <Setter TargetName="ButtonPolygon1" Property="Fill" Value="Red"/>
+                <Setter TargetName="ButtonPolygon2" Property="Fill" Value="Red"/>
+            </Trigger>
+        </ControlTemplate.Triggers>
+    </ControlTemplate>
+    <ControlTemplate x:Key="ButtonControlTemplate3" TargetType="{x:Type Button}">
+        <Grid>
+            <Polygon x:Name="ButtonPolygon3" Stretch="Fill" Points="30,0 10,15 100,100 120,85" Stroke="Red" StrokeThickness="2">
+                <Polygon.Fill>
+                    <SolidColorBrush Color="Green" Opacity="1"/>
+                </Polygon.Fill>
+            </Polygon>
+            <Polygon x:Name="ButtonPolygon4"  Stretch="Fill" Points="25,10 20,0 0,85 5,100" Stroke="Red" StrokeThickness="2">
+                <Polygon.Fill>
+                    <SolidColorBrush Color="Green" Opacity="1"/>
+                </Polygon.Fill>
+            </Polygon>
+        </Grid>
+        <ControlTemplate.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter TargetName="ButtonPolygon3" Property="Fill" Value="Black"></Setter>
+                <Setter TargetName="ButtonPolygon4" Property="Fill" Value="Black"></Setter>
+            </Trigger>
+            <Trigger Property="IsPressed" Value="True">
+                <Setter TargetName="ButtonPolygon3" Property="Fill" Value="Red"/>
+                <Setter TargetName="ButtonPolygon4" Property="Fill" Value="Red"/>
+            </Trigger>
+        </ControlTemplate.Triggers>
+    </ControlTemplate>
+</ResourceDictionary>
