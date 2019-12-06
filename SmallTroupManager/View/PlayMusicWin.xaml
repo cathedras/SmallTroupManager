@@ -6,7 +6,10 @@
         xmlns:local="clr-namespace:SmallTroupManager.View"
         xmlns:video="clr-namespace:VisioForge.Controls.UI.WPF;assembly=VisioForge.Controls.UI"
         mc:Ignorable="d"
-        Title="PlayMusicWin" Height="450" Width="800">
+        Title="PlayMusicWin" Height="450" Width="800"
+        Closed="PlayMusicWin_OnClosed"
+        >
+    <!-->-->
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"></ColumnDefinition>

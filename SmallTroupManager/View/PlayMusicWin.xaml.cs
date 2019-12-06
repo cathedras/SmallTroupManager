@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System;
+using System.Windows;
 using MediaPlayer = VisioForge.Controls.UI.WPF.MediaPlayer;
 
 
@@ -12,6 +13,13 @@ namespace SmallTroupManager.View
         public PlayMusicWin()
         {
             InitializeComponent();
+        }
+
+
+        private void PlayMusicWin_OnClosed(object sender, EventArgs e)
+        {
+            
+            //App.Locator.PlayM.CloseWindow();
         }
     }
 }

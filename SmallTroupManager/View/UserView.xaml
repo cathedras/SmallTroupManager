@@ -6,9 +6,9 @@
              xmlns:local="clr-namespace:SmallTroupManager.View"
              xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
              xmlns:util="clr-namespace:ElCommon.Util;assembly=Util"
-             xmlns:res="clr-namespace:SmallTroupManager.Resources"
+             xmlns:model="clr-namespace:SmallTroupManager.Model"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="900">
+             d:DesignHeight="450" d:DesignWidth="1800">
     <Control.Resources>
        <ResourceDictionary Source="../Resources/ListColItemResource.xaml"></ResourceDictionary>
     </Control.Resources>
@@ -18,12 +18,14 @@
                   KeyDown="ListItemView_OnKeyDown"
                   MouseDoubleClick="ListItemView_OnMouseDoubleClick" 
                   MouseDown="ListItemView_OnMouseDown"
-                  SelectedItem="{Binding RelativeSource={RelativeSource Mode=FindAncestor,AncestorType=local:UserControl1},Path=CurSelect,UpdateSourceTrigger=PropertyChanged}"
+                  SelectedItem="{Binding RelativeSource={RelativeSource Mode=FindAncestor,AncestorType=local:UserControl1},Mode=TwoWay ,Path=CurSelect,UpdateSourceTrigger=PropertyChanged}"
                   SelectionMode="Extended"
-                  SelectedIndex="{Binding RelativeSource={RelativeSource Mode=FindAncestor,AncestorType=local:UserControl1},Path=CurSelectIndex,UpdateSourceTrigger=PropertyChanged}"
+                  SelectedIndex="{Binding RelativeSource={RelativeSource Mode=FindAncestor,AncestorType=local:UserControl1},Path=CurSelectIndex,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
                   x:Name="ListItemView" FontSize="18"
                   >
-             <!--MouseDoubleClick="ListItemView_OnMouseDoubleClick" MouseDown="ListItemView_OnMouseDown"-->
+             <!--                  IsEnabled="{Binding RelativeSource={RelativeSource Mode=FindAncestor,AncestorType=local:UserControl1},Path=IsNoUpdate,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+
+            MouseDoubleClick="ListItemView_OnMouseDoubleClick" MouseDown="ListItemView_OnMouseDown"-->
             <!--<i:Interaction.Triggers>
                 <i:EventTrigger EventName="MouseDoubleClick">
                     <util:ExInvokeCommandAction Command="{Binding Source={StaticResource Locator},Path=VModel.SelectCommand}" CommandParameter="{Binding ElementName=ListItemView,Path=SelectedItem}"></util:ExInvokeCommandAction>--><!----><!--
@@ -34,21 +36,25 @@
             </i:Interaction.Triggers>-->
             <ListView.View>
                 <GridView>
-                    <GridViewColumn Header="表演顺序" Width="100" CellTemplateSelector="{StaticResource OrderTemplate}"></GridViewColumn>
-                    <GridViewColumn Header="表演名称" Width="100" CellTemplateSelector="{StaticResource RepNameTemplate}"></GridViewColumn>
-                    <GridViewColumn Header="表演时长" Width="100" CellTemplateSelector="{StaticResource RepTimeTemplate}"></GridViewColumn>
-                    <GridViewColumn Header="表演者" Width="100" CellTemplateSelector="{StaticResource ActNameTemplate}"></GridViewColumn>
-                    <GridViewColumn Header="背景音乐" Width="100" CellTemplateSelector="{StaticResource RepBgmTemplate}"></GridViewColumn>
-                    <GridViewColumn Header="资源地址" Width="100" CellTemplateSelector="{StaticResource FileResTemplate}"></GridViewColumn>
+                    <GridViewColumn Header="表演顺序" Width="180" CellTemplateSelector="{StaticResource OrderTemplate}"></GridViewColumn>
+                    <GridViewColumn Header="表演名称" Width="180" CellTemplateSelector="{StaticResource RepNameTemplate}"></GridViewColumn>
+                    <GridViewColumn Header="表演类型" Width="180" CellTemplateSelector="{StaticResource RepTypeTemplate}"></GridViewColumn>
+                    <GridViewColumn Header="表演时长" Width="180" CellTemplateSelector="{StaticResource RepTimeTemplate}"></GridViewColumn>
+                    <GridViewColumn Header="表演者" Width="180" CellTemplateSelector="{StaticResource ActNameTemplate}"></GridViewColumn>
+                    <GridViewColumn Header="背景音乐" Width="180" CellTemplateSelector="{StaticResource RepBgmTemplate}"></GridViewColumn>
+                    <GridViewColumn Header="资源地址" Width="180" CellTemplateSelector="{StaticResource FileResTemplate}"></GridViewColumn>
                     <GridViewColumn Header="资源播放程序" Width="150" CellTemplateSelector="{StaticResource ProgTypeTemplate}"></GridViewColumn>
                     <GridViewColumn Header="操作" Width="150">
                         <GridViewColumn.CellTemplate>
-                            <DataTemplate>
+                            <DataTemplate DataType="{x:Type model:RepertoireItem}">
                                 <WrapPanel>
                                     <!--<res:ButtonEx Content="删除" Icon="/Resources/play.png" Margin="10" ButtonType="IconText"/>-->
-                                    <Button Template="{StaticResource ButtonControlTemplate1}" Width="30" Height="30" Visibility="Visible" Margin="20,0,0,0"></Button>
-                                    <Button Template="{StaticResource ButtonControlTemplate2}" Width="30" Height="30" Visibility="Collapsed" Margin="20,0,0,0"></Button>
-                                    <Button Template="{StaticResource ButtonControlTemplate3}" Width="30" Height="30" Margin="20,0,0,0"></Button>
+                                    <Button Template="{StaticResource ButtonControlTemplate1}" Click="ButtonBase_OnClick" TabIndex="-1" Name="start"  Width="30" Height="30"
+                                            Visibility="{Binding Start,UpdateSourceTrigger=PropertyChanged}"
+                                            Margin="20,0,0,0"></Button>
+                                    <Button Template="{StaticResource ButtonControlTemplate2}" Click="ButtonBase_OnClick" TabIndex="-1" Name="stop"  Width="30" Height="30"
+                                            Visibility="{Binding Stop,UpdateSourceTrigger=PropertyChanged}"  Margin="20,0,0,0"></Button>
+                                    <Button Template="{StaticResource ButtonControlTemplate3}" Click="ButtonBase_OnClick" TabIndex="-1" Name="del"  Width="30" Height="30" Margin="20,0,0,0"></Button>
                                 </WrapPanel>
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>

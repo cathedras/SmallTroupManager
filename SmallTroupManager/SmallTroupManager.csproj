@@ -113,7 +113,6 @@
     <Compile Include="Properties\Annotations.cs" />
     <Compile Include="Resources\ListColTemp.cs" />
     <Compile Include="Utils\Gbl.cs" />
-    <Compile Include="ViewModel\ActionInfoViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\PlayMusicViewModel.cs" />
     <Compile Include="ViewModel\UserViewModel.cs" />
@@ -123,9 +122,6 @@
     </Compile>
     <Compile Include="View\UserView.xaml.cs">
       <DependentUpon>UserView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\ActionInfo.xaml.cs">
-      <DependentUpon>ActionInfo.xaml</DependentUpon>
     </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -148,10 +144,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\UserView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="View\ActionInfo.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

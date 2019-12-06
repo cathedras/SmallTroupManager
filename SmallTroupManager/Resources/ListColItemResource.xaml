@@ -5,89 +5,102 @@
     <local:ListColTemp x:Key="OrderTemplate">
         <local:ListColTemp.EditTemplate>
             <DataTemplate  DataType="{x:Type model:RepertoireItem}">
-                <TextBlock Text="{Binding Order}" Height="25"  Width="80"></TextBlock>
+                <TextBlock Text="{Binding Order}" Height="25"  Width="180"></TextBlock>
             </DataTemplate>
         </local:ListColTemp.EditTemplate>
         <local:ListColTemp.ShowTemplate>
             <DataTemplate DataType="{x:Type model:RepertoireItem}">
-                <TextBlock Text="{Binding Order}" Height="25" Width="80"></TextBlock>
+                <TextBlock Text="{Binding Order}" Height="25" Width="180"></TextBlock>
             </DataTemplate>
         </local:ListColTemp.ShowTemplate>
     </local:ListColTemp>
     <local:ListColTemp x:Key="RepNameTemplate">
         <local:ListColTemp.EditTemplate>
             <DataTemplate  DataType="{x:Type model:RepertoireItem}">
-                <TextBox Text="{Binding RepName}" Height="25"  Width="80"></TextBox>
+                <TextBox Text="{Binding RepName}" Height="25"  Width="180" Focusable="True" ForceCursor="True"></TextBox>
             </DataTemplate>
         </local:ListColTemp.EditTemplate>
         <local:ListColTemp.ShowTemplate>
             <DataTemplate DataType="{x:Type model:RepertoireItem}">
-                <TextBlock Text="{Binding RepName}" Height="25" Width="80" ForceCursor="True"></TextBlock>
+                <TextBlock Text="{Binding RepName}" Height="25" Width="180"></TextBlock>
+            </DataTemplate>
+        </local:ListColTemp.ShowTemplate>
+    </local:ListColTemp>
+    <local:ListColTemp x:Key="RepTypeTemplate">
+        <local:ListColTemp.EditTemplate>
+            <DataTemplate  DataType="{x:Type model:RepertoireItem}">
+                <TextBox Text="{Binding RepType}" Height="25"  Width="180"></TextBox>
+            </DataTemplate>
+        </local:ListColTemp.EditTemplate>
+        <local:ListColTemp.ShowTemplate>
+            <DataTemplate DataType="{x:Type model:RepertoireItem}">
+                <TextBlock Text="{Binding RepType}" Height="25" Width="180"></TextBlock>
             </DataTemplate>
         </local:ListColTemp.ShowTemplate>
     </local:ListColTemp>
     <local:ListColTemp x:Key="RepTimeTemplate">
         <local:ListColTemp.EditTemplate>
             <DataTemplate  DataType="{x:Type model:RepertoireItem}">
-                <TextBox Text="{Binding RepTime}" Height="25"  Width="80"></TextBox>
+                <TextBox Text="{Binding RepTime}" Height="25"  Width="180"></TextBox>
             </DataTemplate>
         </local:ListColTemp.EditTemplate>
         <local:ListColTemp.ShowTemplate>
             <DataTemplate DataType="{x:Type model:RepertoireItem}">
-                <TextBlock Text="{Binding RepTime}" Height="25" Width="80"></TextBlock>
+                <TextBlock Text="{Binding RepTime}" Height="25" Width="180"></TextBlock>
             </DataTemplate>
         </local:ListColTemp.ShowTemplate>
     </local:ListColTemp>
     <local:ListColTemp x:Key="ActNameTemplate">
         <local:ListColTemp.EditTemplate>
             <DataTemplate  DataType="{x:Type model:RepertoireItem}">
-                <TextBox Text="{Binding ActName}" Height="25"  Width="80"></TextBox>
+                <TextBox Text="{Binding ActName}" Height="25"  Width="180"></TextBox>
             </DataTemplate>
         </local:ListColTemp.EditTemplate>
         <local:ListColTemp.ShowTemplate>
             <DataTemplate DataType="{x:Type model:RepertoireItem}">
-                <TextBlock Text="{Binding ActName}" Height="25" Width="80"></TextBlock>
+                <TextBlock Text="{Binding ActName}" Height="25" Width="180"></TextBlock>
             </DataTemplate>
         </local:ListColTemp.ShowTemplate>
     </local:ListColTemp>
     <local:ListColTemp x:Key="RepBgmTemplate">
         <local:ListColTemp.EditTemplate>
             <DataTemplate  DataType="{x:Type model:RepertoireItem}">
-                <TextBox Text="{Binding RepBgm}" Height="25"  Width="80"></TextBox>
+                <TextBox Text="{Binding RepBgm}" Height="25"  Width="180"></TextBox>
             </DataTemplate>
         </local:ListColTemp.EditTemplate>
         <local:ListColTemp.ShowTemplate>
             <DataTemplate DataType="{x:Type model:RepertoireItem}">
-                <TextBlock Text="{Binding RepBgm}" Height="25" Width="80"></TextBlock>
+                <TextBlock Text="{Binding RepBgm}" Height="25" Width="180"></TextBlock>
             </DataTemplate>
         </local:ListColTemp.ShowTemplate>
     </local:ListColTemp>
     <local:ListColTemp x:Key="FileResTemplate">
         <local:ListColTemp.EditTemplate>
             <DataTemplate  DataType="{x:Type model:RepertoireItem}">
-                <TextBox Text="{Binding FileRes}" Height="25"  Width="80"></TextBox>
+                <TextBox Text="{Binding FileRes}" Height="25"  Width="180"></TextBox>
             </DataTemplate>
         </local:ListColTemp.EditTemplate>
         <local:ListColTemp.ShowTemplate>
             <DataTemplate DataType="{x:Type model:RepertoireItem}">
-                <TextBlock Text="{Binding FileRes}" Height="25" Width="80"></TextBlock>
+                <TextBlock Text="{Binding FileRes}" Height="25" Width="180"></TextBlock>
             </DataTemplate>
         </local:ListColTemp.ShowTemplate>
     </local:ListColTemp>
     <local:ListColTemp x:Key="ProgTypeTemplate">
         <local:ListColTemp.EditTemplate>
             <DataTemplate  DataType="{x:Type model:RepertoireItem}">
-                <TextBox Text="{Binding ProgType}" Height="25"  Width="80"></TextBox>
+                <TextBox Text="{Binding ProgType}" Height="25"  Width="180"></TextBox>
             </DataTemplate>
         </local:ListColTemp.EditTemplate>
         <local:ListColTemp.ShowTemplate>
             <DataTemplate DataType="{x:Type model:RepertoireItem}">
-                <TextBlock Text="{Binding ProgType}" Height="25" Width="80"></TextBlock>
+                <TextBlock Text="{Binding ProgType}" Height="25" Width="180"></TextBlock>
             </DataTemplate>
         </local:ListColTemp.ShowTemplate>
     </local:ListColTemp>
      <ControlTemplate x:Key="ButtonTemplate" TargetType="{x:Type CheckBox}">
         <Grid>
+            
             <Ellipse x:Name="outCircle" Width="21.3" Height="21.3">
                 <Ellipse.Fill>
                     <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
@@ -132,66 +145,66 @@
     </ControlTemplate>
     <ControlTemplate x:Key="ButtonControlTemplate1" TargetType="{x:Type Button}">
         <Grid>
-            <Polygon x:Name="ButtonPolygon" Stretch="Fill" Points="50,50 0,0 0,100" Stroke="Red" StrokeThickness="2">
+            <Polygon x:Name="ButtonPolygon" Stretch="Fill" Points="50,50 0,0 0,100" Stroke="YellowGreen" StrokeThickness="2">
                 <Polygon.Fill>
-                    <SolidColorBrush Color="Green" Opacity="0.4"/>
+                    <SolidColorBrush Color="LightSeaGreen" Opacity="0.4"/>
                 </Polygon.Fill>
             </Polygon>
         </Grid>
         <ControlTemplate.Triggers>
             <Trigger Property="IsMouseOver" Value="True">
-                <Setter TargetName="ButtonPolygon" Property="Fill" Value="Black"></Setter>
+                <Setter TargetName="ButtonPolygon" Property="Fill" Value="LightSalmon"></Setter>
             </Trigger>
             <Trigger Property="IsPressed" Value="True">
-                <Setter TargetName="ButtonPolygon" Property="Fill" Value="Red"/>
+                <Setter TargetName="ButtonPolygon" Property="Fill" Value="LightSlateGray"/>
             </Trigger>
         </ControlTemplate.Triggers>
     </ControlTemplate>
     <ControlTemplate x:Key="ButtonControlTemplate2" TargetType="{x:Type Button}">
         <Grid>
-            <Polygon x:Name="ButtonPolygon1" Margin="0,0,20,0" Stretch="Fill" Points="10,0 0,0 0,100 10,100" Stroke="Red" StrokeThickness="2">
+            <Polygon x:Name="ButtonPolygon1" Margin="0,0,20,0" Stretch="Fill" Points="10,0 0,0 0,100 10,100" Stroke="YellowGreen" StrokeThickness="2">
                 <Polygon.Fill>
-                    <SolidColorBrush Color="Green" Opacity="0.4"/>
+                    <SolidColorBrush Color="LightSeaGreen" Opacity="0.4"/>
                 </Polygon.Fill>
             </Polygon>
-            <Polygon x:Name="ButtonPolygon2" Margin="20,0,0,0" Stretch="Fill" Points="10,0 0,0 0,100 10,100" Stroke="Red" StrokeThickness="2">
+            <Polygon x:Name="ButtonPolygon2" Margin="20,0,0,0" Stretch="Fill" Points="10,0 0,0 0,100 10,100" Stroke="YellowGreen" StrokeThickness="2">
                 <Polygon.Fill>
-                    <SolidColorBrush Color="Green" Opacity="0.4"/>
+                    <SolidColorBrush Color="LightSeaGreen" Opacity="0.4"/>
                 </Polygon.Fill>
             </Polygon>
         </Grid>
         <ControlTemplate.Triggers>
             <Trigger Property="IsMouseOver" Value="True">
-                <Setter TargetName="ButtonPolygon1" Property="Fill" Value="Black"></Setter>
-                <Setter TargetName="ButtonPolygon2" Property="Fill" Value="Black"></Setter>
+                <Setter TargetName="ButtonPolygon1" Property="Fill" Value="LightSalmon"></Setter>
+                <Setter TargetName="ButtonPolygon2" Property="Fill" Value="LightSalmon"></Setter>
             </Trigger>
             <Trigger Property="IsPressed" Value="True">
-                <Setter TargetName="ButtonPolygon1" Property="Fill" Value="Red"/>
-                <Setter TargetName="ButtonPolygon2" Property="Fill" Value="Red"/>
+                <Setter TargetName="ButtonPolygon1" Property="Fill" Value="LightSlateGray"/>
+                <Setter TargetName="ButtonPolygon2" Property="Fill" Value="LightSlateGray"/>
             </Trigger>
         </ControlTemplate.Triggers>
     </ControlTemplate>
     <ControlTemplate x:Key="ButtonControlTemplate3" TargetType="{x:Type Button}">
         <Grid>
-            <Polygon x:Name="ButtonPolygon3" Stretch="Fill" Points="30,0 10,15 100,100 120,85" Stroke="Red" StrokeThickness="2">
+            <Polygon x:Name="ButtonPolygon3" Stretch="Fill" Points="30,0 10,15 100,100 120,85" Stroke="YellowGreen" StrokeThickness="2">
                 <Polygon.Fill>
-                    <SolidColorBrush Color="Green" Opacity="1"/>
+                    <SolidColorBrush Color="LightSeaGreen" Opacity="0.8"/>
                 </Polygon.Fill>
             </Polygon>
-            <Polygon x:Name="ButtonPolygon4"  Stretch="Fill" Points="25,10 20,0 0,85 5,100" Stroke="Red" StrokeThickness="2">
+            <Polygon x:Name="ButtonPolygon4"  Stretch="Fill" Points="25,10 20,0 0,85 5,100" Stroke="YellowGreen" StrokeThickness="2">
                 <Polygon.Fill>
-                    <SolidColorBrush Color="Green" Opacity="1"/>
+                    <SolidColorBrush Color="LightSeaGreen" Opacity="0.8"/>
                 </Polygon.Fill>
             </Polygon>
         </Grid>
         <ControlTemplate.Triggers>
             <Trigger Property="IsMouseOver" Value="True">
-                <Setter TargetName="ButtonPolygon3" Property="Fill" Value="Black"></Setter>
-                <Setter TargetName="ButtonPolygon4" Property="Fill" Value="Black"></Setter>
+                <Setter TargetName="ButtonPolygon3" Property="Fill" Value="LightSalmon"></Setter>
+                <Setter TargetName="ButtonPolygon4" Property="Fill" Value="LightSalmon"></Setter>
             </Trigger>
             <Trigger Property="IsPressed" Value="True">
-                <Setter TargetName="ButtonPolygon3" Property="Fill" Value="Red"/>
-                <Setter TargetName="ButtonPolygon4" Property="Fill" Value="Red"/>
+                <Setter TargetName="ButtonPolygon3" Property="Fill" Value="LightSlateGray"/>
+                <Setter TargetName="ButtonPolygon4" Property="Fill" Value="LightSlateGray"/>
             </Trigger>
         </ControlTemplate.Triggers>
     </ControlTemplate>

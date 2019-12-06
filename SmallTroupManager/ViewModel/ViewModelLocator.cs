@@ -45,7 +45,6 @@ namespace SmallTroupManager.ViewModel
 
             SimpleIoc.Default.Register<MainViewModel>();
             SimpleIoc.Default.Register<UserViewModel>();
-            SimpleIoc.Default.Register<ActionInfoViewModel>();
             SimpleIoc.Default.Register<PlayMusicViewModel>();
 
         }
@@ -65,14 +64,7 @@ namespace SmallTroupManager.ViewModel
                 return ServiceLocator.Current.GetInstance<UserViewModel>();
             }
         }
-        public ActionInfoViewModel ActInfo
-        {
-            get
-            {
-                return ServiceLocator.Current.GetInstance<ActionInfoViewModel>();
-            }
-        }
-
+   
         public PlayMusicViewModel PlayM
         {
             get
