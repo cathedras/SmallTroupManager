@@ -48,6 +48,7 @@ namespace SmallTroupManager.View
         private int _curSelectIndex;
         private ILog _log = LogManager.GetLogger("logfile");
         private bool _isNoUpdate = true;
+       
         
         public ObservableCollection<RepertoireItem> TargetItems
         {
@@ -158,27 +159,29 @@ namespace SmallTroupManager.View
                 });
             }
         }
-
+        int index = 0;
         private void ButtonBase_OnClick(object sender, RoutedEventArgs e)
         {
             var o = (Button)e.OriginalSource;
+            _log.Debug("点击得到的对象："+e.Source+$",{sender}");
             switch (o.Name)
             {
                 case "start":
                     var playLst = new List<string>();
                     playLst.Add(CurSelect.FileRes);
-
+                    index = TargetItems.IndexOf(CurSelect);
                     App.Locator.PlayM.NoWindowPlayMusic(playLst, (b) =>
                     {
-                        CurSelect.RepTime = b;
+                        TargetItems[index].RepTime = b;
                     });
-                    CurSelect.Stop = Visibility.Visible;
-                    CurSelect.Start = Visibility.Collapsed;
+                    TargetItems[index].Stop = Visibility.Visible;
+                    TargetItems[index].Start = Visibility.Collapsed;
                     break;
                 case "stop":
                     App.Locator.PlayM.StopPlay();
-                    CurSelect.Stop = Visibility.Collapsed;
-                    CurSelect.Start = Visibility.Visible;
+                    CurSelect = TargetItems[index];
+                    TargetItems[index].Stop = Visibility.Collapsed;
+                    TargetItems[index].Start = Visibility.Visible;
                     break;
                 case "del":
                     TargetItems.Remove(CurSelect);
@@ -186,6 +189,7 @@ namespace SmallTroupManager.View
                 default:
                     break;
             }
+            o.Name = string.Empty;
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

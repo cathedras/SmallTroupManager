@@ -6,8 +6,13 @@ using System.Threading.Tasks;
 using ElCommon.Util;
 namespace SmallTroupManager.Utils
 {
-    public class Gbl:IntrinsicCfg
+    public class Gbl : IntrinsicCfg
     {
+        public Gbl()
+        {
+            ExternalKuGou = "";
+        }
 
+        public string ExternalKuGou { get; set; }
     }
 }

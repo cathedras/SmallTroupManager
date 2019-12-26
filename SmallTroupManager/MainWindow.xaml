@@ -20,8 +20,8 @@
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
-        <Menu Grid.Column="0" Grid.Row="0">
-            <MenuItem Header="文件" Width="70">
+        <Menu Grid.Column="0" Grid.Row="0" Height="25">
+            <MenuItem Header="文件" Width="70" VerticalAlignment="Center" Margin="4">
                 <MenuItem Header="打开演出文件" Command="{Binding Source={StaticResource Locator},Path=Main.OpenFileCommand}"></MenuItem>
                 <MenuItem Header="保存演出文件" Command="{Binding Source={StaticResource Locator},Path=Main.SaveFileCommand}"></MenuItem>
                 <MenuItem Header="退出程序" Command="{Binding Source={StaticResource Locator},Path=Main.CloseCommand}"></MenuItem>
@@ -50,9 +50,9 @@
                     <MenuItem Header="腾讯视频"></MenuItem>
                     <MenuItem Header="爱奇艺视频"></MenuItem>
                 </MenuItem>
-                <MenuItem Header="外部音乐播放器" Command="{Binding Source={StaticResource  Locator}}">
+                <MenuItem Header="外部音乐播放器">
                     <MenuItem Header="Windows Media Player"></MenuItem>
-                    <MenuItem Header="酷狗音乐"></MenuItem>
+                    <MenuItem Header="酷狗音乐" Command="{Binding Source={StaticResource Locator},Path=Main.OpenExeCommand}" CommandParameter="酷狗音乐"></MenuItem>
                     <MenuItem Header="百度音乐"></MenuItem>
                     <MenuItem Header="网易云音乐"></MenuItem>
                 </MenuItem>
@@ -60,6 +60,9 @@
                     <MenuItem Header="谷歌浏览器"></MenuItem>
                     <MenuItem Header="Windows Edge"></MenuItem>
                 </MenuItem>
+            </MenuItem>
+            <MenuItem Header="设置" Width="70">
+                <MenuItem Header="程序设置" Command="{Binding Source={StaticResource Locator}}"></MenuItem>
             </MenuItem>
             <MenuItem Header="关于">
                 <MenuItem Header="版本" Command="{Binding Source={StaticResource  Locator}}"></MenuItem>

@@ -83,6 +83,7 @@ namespace SmallTroupManager.ViewModel
                 Title = title
             };
             var uc = new UserControl1();
+        
             RepertoireItem curadd = null;
             if (item==null)
             {
@@ -228,8 +229,34 @@ namespace SmallTroupManager.ViewModel
                
             }));
         }
-       
+        private ICommand _openExeCommand;
+        public ICommand OpenExeCommand
+        {
+            get => _openExeCommand ?? (_openExeCommand = new UtilRelayCommand(delegate (object obj)
+            {
+                var str = (string) obj;
+                if (str == "¿á¹·ÒôÀÖ")
+                {
 
+                }
+            }, pre =>
+            {
+                return true;
+            }));
+
+        }
+        private ICommand _openSettingWindowCommand;
+        public ICommand OpenSettingWindowCommand
+        {
+            get => _openSettingWindowCommand ?? (_openSettingWindowCommand = new UtilRelayCommand(delegate (object obj)
+            {
+                
+            }, pre =>
+            {
+                return true;
+            }));
+
+        }
         #endregion
 
 

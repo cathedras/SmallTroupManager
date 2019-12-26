@@ -21,7 +21,7 @@
                   SelectedItem="{Binding RelativeSource={RelativeSource Mode=FindAncestor,AncestorType=local:UserControl1},Mode=TwoWay ,Path=CurSelect,UpdateSourceTrigger=PropertyChanged}"
                   SelectionMode="Extended"
                   SelectedIndex="{Binding RelativeSource={RelativeSource Mode=FindAncestor,AncestorType=local:UserControl1},Path=CurSelectIndex,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
-                  x:Name="ListItemView" FontSize="18"
+                  x:Name="ListItemView" FontSize="18" AllowDrop="True"
                   >
              <!--                  IsEnabled="{Binding RelativeSource={RelativeSource Mode=FindAncestor,AncestorType=local:UserControl1},Path=IsNoUpdate,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
 

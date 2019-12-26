@@ -120,6 +120,9 @@
     <Compile Include="View\PlayMusicWin.xaml.cs">
       <DependentUpon>PlayMusicWin.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\ProgrammeSettingView.xaml.cs">
+      <DependentUpon>ProgrammeSettingView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\UserView.xaml.cs">
       <DependentUpon>UserView.xaml</DependentUpon>
     </Compile>
@@ -140,6 +143,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\PlayMusicWin.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\ProgrammeSettingView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
