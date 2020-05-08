@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SmallTroupManager.View"
         xmlns:video="clr-namespace:VisioForge.Controls.UI.WPF;assembly=VisioForge.Controls.UI"
+        xmlns:vlc="clr-namespace:Vlc.DotNet.Wpf;assembly=Vlc.DotNet.Wpf"
         mc:Ignorable="d"
         Title="PlayMusicWin" Height="450" Width="800"
         Closed="PlayMusicWin_OnClosed"
@@ -19,7 +20,8 @@
             <RowDefinition Height="*"></RowDefinition>
             <RowDefinition Height="Auto"></RowDefinition>
         </Grid.RowDefinitions>
-        <video:MediaPlayer Grid.Column="0" Grid.Row="0" Background="Black" x:Name="VideoPlayer"></video:MediaPlayer>
+        <!--<video:MediaPlayer Grid.Column="0" Grid.Row="0" Background="Black" x:Name="VideoPlayer"></video:MediaPlayer>-->
+        <vlc:VlcControl x:Name="VlcControl"></vlc:VlcControl>
         <WrapPanel Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Height="100">
             <Button Width="100" Height="50" Margin="5" Content="播放" Command="{Binding Source={StaticResource Locator},Path=PlayM.StartingCommand}"></Button>
             <Button Width="100" Height="50" Margin="5" Content="暂停"></Button>

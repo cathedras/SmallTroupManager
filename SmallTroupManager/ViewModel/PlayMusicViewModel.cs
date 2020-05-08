@@ -12,16 +12,18 @@ using GalaSoft.MvvmLight.CommandWpf;
 using log4net;
 using SmallTroupManager.Model;
 using SmallTroupManager.View;
-using VisioForge.Tools;
-using VisioForge.Controls.UI.WPF;
-using VisioForge.Types;
+using Vlc.DotNet.Core;
+//using VisioForge.Tools;
+//using VisioForge.Controls.UI.WPF;
+//using VisioForge.Types;
+using Vlc.DotNet.Wpf;
 
 namespace SmallTroupManager.ViewModel
 {
     public class PlayMusicViewModel:ViewModelBase
     {
         private ILog _log = LogManager.GetLogger("logfile");
-        private MediaPlayer _curMediaPlayer;
+        private VlcMediaPlayer _curMediaPlayer;
         private ObservableCollection<string> _curList;
         private string _playTime = string.Empty;
 
@@ -36,35 +38,35 @@ namespace SmallTroupManager.ViewModel
 
         public void OnPlay()
         {
-            _curMediaPlayer.Play();
+            //_curMediaPlayer.Play();
         }
 
         public void InitShow(List<string> bList)
         {
             var play = new PlayMusicWin();
-            _curMediaPlayer = play.VideoPlayer;
+           // _curMediaPlayer = play.VideoPlayer;
             CurList.Clear();
             bList.ForEach(b =>
             {
                 CurList.Add(Path.GetFileName(b));
             });
-            _curMediaPlayer.OnError += CurMediaPlayerOnOnError;
-            _curMediaPlayer.FilenamesOrURL.AddRange(bList);
-            _curMediaPlayer.Audio_Play = true;
+            //_curMediaPlayer.OnError += CurMediaPlayerOnOnError;
+            //_curMediaPlayer.FilenamesOrURL.AddRange(bList);
+            //_curMediaPlayer.Audio_Play = true;
            
-            //_curMediaPlayer.Audio_OutputDevice = "";
-            var isClose = play.ShowDialog();
-            _curMediaPlayer = null;
+            ////_curMediaPlayer.Audio_OutputDevice = "";
+            //var isClose = play.ShowDialog();
+            //_curMediaPlayer = null;
         }
 
         public void NoWindowPlayMusic(List<string> bList,Action<string> act)
         {  
-            _curMediaPlayer = new MediaPlayer();
-            _curMediaPlayer.FilenamesOrURL.Clear();
-            _curMediaPlayer.FilenamesOrURL.AddRange(bList);
-            _curMediaPlayer.OnError += CurMediaPlayerOnOnError;
-            _curMediaPlayer.OnLicenseRequired += CurMediaPlayer_OnLicenseRequired;
-            _curMediaPlayer.Audio_Play = true;
+            //_curMediaPlayer = new MediaPlayer();
+            //_curMediaPlayer.FilenamesOrURL.Clear();
+            //_curMediaPlayer.FilenamesOrURL.AddRange(bList);
+            //_curMediaPlayer.OnError += CurMediaPlayerOnOnError;
+            //_curMediaPlayer.OnLicenseRequired += CurMediaPlayer_OnLicenseRequired;
+            //_curMediaPlayer.Audio_Play = true;
             //_log.Debug(player.Position_Get_Time());
             Task.Factory.StartNew(() =>
             {
@@ -77,22 +79,22 @@ namespace SmallTroupManager.ViewModel
 
 
            
-            _curMediaPlayer.Play(true);
+           // _curMediaPlayer.Play(true);
         }
 
         public void StopPlay()
         {
-            _curMediaPlayer.Stop();
+            //_curMediaPlayer.Stop();
         }
 
         public bool GetTimeCount(out string timeFormat)
         {
-            var max = (int)(_curMediaPlayer.Duration_Time() / 1000);
-            var maxStr = MediaPlayer.Helpful_SecondsToTimeFormatted(max);
-            int cur = (int)(_curMediaPlayer.Position_Get_Time() / 1000);
-            var curStr = MediaPlayer.Helpful_SecondsToTimeFormatted(cur);
-            timeFormat = $"{curStr} / {maxStr}";
-            if ( max > 0 && max == cur)
+            //var max = (int)(_curMediaPlayer.Duration_Time() / 1000);
+            //var maxStr = MediaPlayer.Helpful_SecondsToTimeFormatted(max);
+            //int cur = (int)(_curMediaPlayer.Position_Get_Time() / 1000);
+            //var curStr = MediaPlayer.Helpful_SecondsToTimeFormatted(cur);
+            timeFormat = "";//$"{curStr} / {maxStr}";
+           // if (max > 0 && max == cur)
             {
                 return false;
             }
@@ -100,21 +102,37 @@ namespace SmallTroupManager.ViewModel
         }
 
 
-        private void CurMediaPlayerOnOnError(object sender, ErrorsEventArgs e)
+        //private void CurMediaPlayerOnOnError(object sender, ErrorsEventArgs e)
+        //{
+        //    _log.Debug(e.Message);
+        //}
+        //private void CurMediaPlayer_OnLicenseRequired(object sender, LicenseEventArgs e)
+        //{
+        //    if (e.Level == LicenseLevel.Standard)
+        //    {
+        //        _log.Debug($"{e.Message},{e.Level}");
+        //    }
+        //}
+        public VlcMediaPlayer CreatePlayer(VlcControl vlcPlayer, string path)
         {
-            _log.Debug(e.Message);
-        }
-        private void CurMediaPlayer_OnLicenseRequired(object sender, LicenseEventArgs e)
-        {
-            if (e.Level == LicenseLevel.Standard)
+            var vlcLibDirectory = new DirectoryInfo(Path.Combine(path, "libvlc", IntPtr.Size == 4 ? "win-x86" : "win-x64"));
+
+            var options = new string[]
             {
-                _log.Debug($"{e.Message},{e.Level}");
-            }
+                // VLC options can be given here. Please refer to the VLC command line documentation.
+            };
+
+            vlcPlayer.SourceProvider.CreatePlayer(vlcLibDirectory, options);
+
+            // Load libvlc libraries and initializes stuff. It is important that the options (if you want to pass any) and lib directory are given before calling this method.
+            vlcPlayer.SourceProvider.MediaPlayer.Play("http://download.blender.org/peach/bigbuckbunny_movies/big_buck_bunny_480p_h264.mov");
+            return vlcPlayer.SourceProvider.MediaPlayer;
         }
+
 
         public void CloseWindow()
         {
-            _curMediaPlayer.Stop();
+            //_curMediaPlayer.Stop();
         }
 
     }

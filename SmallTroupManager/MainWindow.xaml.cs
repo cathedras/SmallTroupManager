@@ -36,6 +36,7 @@ namespace SmallTroupManager
 
         protected override void OnClosed(EventArgs e)
         {
+            App.Locator.Main.OnCloseWindow();
             Environment.Exit(0);
         }
 

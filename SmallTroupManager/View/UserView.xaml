@@ -8,7 +8,7 @@
              xmlns:util="clr-namespace:ElCommon.Util;assembly=Util"
              xmlns:model="clr-namespace:SmallTroupManager.Model"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="1800">
+             d:DesignHeight="450" d:DesignWidth="1700">
     <Control.Resources>
        <ResourceDictionary Source="../Resources/ListColItemResource.xaml"></ResourceDictionary>
     </Control.Resources>
@@ -21,9 +21,37 @@
                   SelectedItem="{Binding RelativeSource={RelativeSource Mode=FindAncestor,AncestorType=local:UserControl1},Mode=TwoWay ,Path=CurSelect,UpdateSourceTrigger=PropertyChanged}"
                   SelectionMode="Extended"
                   SelectedIndex="{Binding RelativeSource={RelativeSource Mode=FindAncestor,AncestorType=local:UserControl1},Path=CurSelectIndex,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
-                  x:Name="ListItemView" FontSize="18" AllowDrop="True"
+                  x:Name="ListItemView" FontSize="18" AllowDrop="True" Background="Transparent"
                   >
-             <!--                  IsEnabled="{Binding RelativeSource={RelativeSource Mode=FindAncestor,AncestorType=local:UserControl1},Path=IsNoUpdate,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+            <!--<ControlTemplate TargetType="{x:Type GridViewColumnHeader}">
+                <ControlTemplate.Triggers>
+                    <Trigger Property="IsPressed"
+                             Value="true">
+                        --><!--<Setter TargetName="HighlightBorder"
+                                Property="Visibility"
+                                Value="Hidden"/>
+                        <Setter TargetName="PART_HeaderGripper"
+                                Property="Visibility"
+                                Value="Hidden"/>--><!--
+                        <Setter Property="Background"
+                                Value="SkyBlue"/>
+                        <Setter Property="Foreground"
+                                Value="Yellow"/>
+                    </Trigger>
+
+                    <Trigger Property="Role"
+                             Value="Floating">
+                        --><!--<Setter TargetName="PART_HeaderGripper"
+                                Property="Visibility"
+                                Value="Collapsed"/>--><!--
+                        <Setter Property="Background"
+                                Value="Yellow"/>
+                        <Setter Property="Foreground"
+                                Value="SkyBlue"/>
+                    </Trigger>
+                </ControlTemplate.Triggers>
+            </ControlTemplate>-->
+            <!--                  IsEnabled="{Binding RelativeSource={RelativeSource Mode=FindAncestor,AncestorType=local:UserControl1},Path=IsNoUpdate,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
 
             MouseDoubleClick="ListItemView_OnMouseDoubleClick" MouseDown="ListItemView_OnMouseDown"-->
             <!--<i:Interaction.Triggers>
@@ -59,8 +87,10 @@
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
+                    <GridViewColumn Header="" Width="150" CellTemplateSelector="{StaticResource ProgTypeTemplate}"></GridViewColumn>
                 </GridView>
             </ListView.View>
+
         </ListView>
     </Grid>
 </UserControl>

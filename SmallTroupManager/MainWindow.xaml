@@ -9,9 +9,17 @@
         xmlns:avaDock ="http://schemas.xceed.com/wpf/xaml/avalondock"
         xmlns:avaDoc ="clr-namespace:Microsoft.Windows.Shell;assembly=Xceed.Wpf.AvalonDock"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800" Background="AliceBlue">
+        Title="MainWindow" Height="450" Width="800" >
+    <!--WindowStyle="None" Foreground="#FF8B5555"-->
+    <!--<Window.Background>
+        <LinearGradientBrush EndPoint="0.5,1" MappingMode="RelativeToBoundingBox" StartPoint="0.5,0">
+            <GradientStop Color="#FFC36F6F"/>
+            <GradientStop Color="#FF73A68F" Offset="1"/>
+        </LinearGradientBrush>
+    </Window.Background>-->
     <Grid>
         <Grid.RowDefinitions>
+            <RowDefinition Height="auto"></RowDefinition>
             <RowDefinition Height="auto"></RowDefinition>
             <RowDefinition Height="auto"></RowDefinition>
             <RowDefinition Height="*"></RowDefinition>
@@ -20,7 +28,13 @@
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
-        <Menu Grid.Column="0" Grid.Row="0" Height="25">
+        <Grid Grid.Column="0" Grid.Row="0" Height="0" >
+            <!--<TextBlock FontFamily="微软雅黑" FontSize="20" Height="25" Width="250" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Center" Text="团队演出自动管理"></TextBlock>
+            <Button Width="20" Height="20" Background="Black" HorizontalAlignment="Right" Margin="0,0,5,0"></Button>
+            <Button Width="20" Height="20" Background="Black" HorizontalAlignment="Right" Margin="0,0,30,0"></Button>
+            <Button Width="20" Height="20" Background="Black" HorizontalAlignment="Right" Margin="0,0,55,0"></Button>-->
+        </Grid>
+        <Menu Background="Transparent" Grid.Column="0" Grid.Row="1" Height="25">
             <MenuItem Header="文件" Width="70" VerticalAlignment="Center" Margin="4">
                 <MenuItem Header="打开演出文件" Command="{Binding Source={StaticResource Locator},Path=Main.OpenFileCommand}"></MenuItem>
                 <MenuItem Header="保存演出文件" Command="{Binding Source={StaticResource Locator},Path=Main.SaveFileCommand}"></MenuItem>
@@ -69,22 +83,24 @@
                 <MenuItem Header="帮助" Command="{Binding Source={StaticResource  Locator}}"></MenuItem>
             </MenuItem>
         </Menu>
-        <WrapPanel Grid.Column="0" Grid.Row="1">
-            <Button Margin="3" Content="开始演出" Command="{Binding Source={StaticResource  Locator}}"></Button>
+        <WrapPanel Grid.Column="0" Grid.Row="2">
+            <Button Margin="3" Background="Transparent" BorderBrush="Transparent" Content="开始演出" Command="{Binding Source={StaticResource  Locator}}"></Button>
         </WrapPanel>
-        
-        <avaDock:DockingManager x:Name="DockingManager" Grid.Column="0" Grid.Row="2" Background="AliceBlue">
+
+        <avaDock:DockingManager  x:Name="DockingManager" Grid.Column="0" Grid.Row="3" Foreground="Transparent" Background="#FFE89898" OpacityMask="{DynamicResource {x:Static SystemColors.HotTrackBrushKey}}">
             <avaDock:LayoutRoot>
                 <avaDock:LayoutPanel Orientation="Vertical">
-                    <avaDock:LayoutDocumentPane x:Name="DocumentPane" PropertyChanged="DocumentPane_OnPropertyChanged"/>
+                    <avaDock:LayoutPanel.Children>
+                        <avaDock:LayoutDocumentPane x:Name="DocumentPane" PropertyChanged="DocumentPane_OnPropertyChanged"></avaDock:LayoutDocumentPane>
+                    </avaDock:LayoutPanel.Children>
                 </avaDock:LayoutPanel>
             </avaDock:LayoutRoot>
         </avaDock:DockingManager>
-        <StatusBar Name="Bar" Grid.Column="0" Grid.Row="3">
+        <StatusBar Background="Transparent" Name="Bar" Grid.Column="0" Grid.Row="4">
             <WrapPanel>
                 <TextBlock Text="程序状态:"></TextBlock>
             </WrapPanel>
-          
+
         </StatusBar>
     </Grid>
 </Window>

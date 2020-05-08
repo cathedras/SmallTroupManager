@@ -1,8 +1,10 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Security;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -74,13 +76,18 @@ namespace SmallTroupManager.ViewModel
         #region 通用Function
 
         public int id = 1;
-       
+       /// <summary>
+       /// 添加到界面上的信息
+       /// </summary>
+       /// <param name="item"></param>
+       /// <param name="title"></param>
         public void AddAActionFile(List<RepertoireItem> item = null,string title = "Sample")
         {
             var la = new LayoutAnchorable
             {
                 CanClose = true,
-                Title = title
+                Title = title,
+                
             };
             var uc = new UserControl1();
         
@@ -147,7 +154,9 @@ namespace SmallTroupManager.ViewModel
                 }
             }
         }
-
+        /// <summary>
+        /// 加载本地文件
+        /// </summary>
         public void LoadFile()
         {
             var ofd = new OpenFileDialog()
@@ -162,7 +171,6 @@ namespace SmallTroupManager.ViewModel
                     var pXml = new PlainXmlDb(ofdFileName);
                     var allValue = new List<SaveFileList>();
                     pXml.LoadObjListFromDb("File", ref allValue);
-                    var index = 0;
 
                     List<RepertoireItem> itemLst = new List<RepertoireItem>();
                     foreach (var va in allValue)
@@ -177,6 +185,11 @@ namespace SmallTroupManager.ViewModel
 
         }
 
+
+        public void OnCloseWindow()
+        {
+            _gbl.Save("SMT.ini", typeof(Gbl));
+        }
         #endregion
 
 
@@ -237,7 +250,20 @@ namespace SmallTroupManager.ViewModel
                 var str = (string) obj;
                 if (str == "酷狗音乐")
                 {
-
+                    var diag = new OpenFileDialog();
+                    diag.Filter = "EXE|*.exe";
+                    var res = diag.ShowDialog();
+                    if (res.HasValue)
+                    {
+                        var fileName = diag.FileName;
+                        if (fileName.EndsWith(".exe"))
+                        {
+                            //需要后期修改到设置中
+                            Process.Start(fileName);
+                        }
+                       
+                    }
+                    
                 }
             }, pre =>
             {
@@ -257,6 +283,7 @@ namespace SmallTroupManager.ViewModel
             }));
 
         }
+     
         #endregion
 
 
