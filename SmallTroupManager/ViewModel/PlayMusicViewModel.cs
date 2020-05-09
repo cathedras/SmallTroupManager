@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.CommandWpf;
@@ -24,6 +25,7 @@ namespace SmallTroupManager.ViewModel
     {
         private ILog _log = LogManager.GetLogger("logfile");
         private VlcMediaPlayer _curMediaPlayer;
+        private VlcControl _player;
         private ObservableCollection<string> _curList;
         private string _playTime = string.Empty;
 
@@ -35,10 +37,12 @@ namespace SmallTroupManager.ViewModel
         public ICommand StartingCommand => _startingCommand ?? (_startingCommand = new RelayCommand(() => OnPlay()));
 
         public string PlayTime { get => _playTime; set => _playTime = value; }
+        public VlcControl Player { get => _player; set => _player = value; }
 
         public void OnPlay()
         {
             //_curMediaPlayer.Play();
+            _curMediaPlayer = CreatePlayer(Player, AppDomain.CurrentDomain.BaseDirectory);
         }
 
         public void InitShow(List<string> bList)
@@ -55,7 +59,7 @@ namespace SmallTroupManager.ViewModel
             //_curMediaPlayer.Audio_Play = true;
            
             ////_curMediaPlayer.Audio_OutputDevice = "";
-            //var isClose = play.ShowDialog();
+            var isClose = play.ShowDialog();
             //_curMediaPlayer = null;
         }
 
@@ -120,12 +124,15 @@ namespace SmallTroupManager.ViewModel
             var options = new string[]
             {
                 // VLC options can be given here. Please refer to the VLC command line documentation.
+                "--file-logging", "-vvv", "--logfile=Logs.log"
             };
 
             vlcPlayer.SourceProvider.CreatePlayer(vlcLibDirectory, options);
-
+            //var play = vlcPlayer.SourceProvider.MediaPlayer.Manager.CreateMediaPlayer();
             // Load libvlc libraries and initializes stuff. It is important that the options (if you want to pass any) and lib directory are given before calling this method.
-            vlcPlayer.SourceProvider.MediaPlayer.Play("http://download.blender.org/peach/bigbuckbunny_movies/big_buck_bunny_480p_h264.mov");
+             //vlcPlayer.SourceProvider.MediaPlayer.Play(new FileInfo("../../TestData/Video/Rescue Emergency.mp4"));
+             vlcPlayer.SourceProvider.MediaPlayer.Play(new Uri("rtmp://media3.sinovision.net:1935/live/livestream"));
+            
             return vlcPlayer.SourceProvider.MediaPlayer;
         }
 

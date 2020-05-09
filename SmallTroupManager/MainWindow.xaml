@@ -57,7 +57,7 @@
             <MenuItem Header="工具" Width="70">
                 <MenuItem Header="录音工具" Command="{Binding Source={StaticResource  Locator}}"></MenuItem>
                 <MenuItem Header="BGM剪辑" Command="{Binding Source={StaticResource  Locator}}"></MenuItem>
-                <MenuItem Header="本地视频播放器" Command="{Binding Source={StaticResource  Locator}}"></MenuItem>
+                <MenuItem Header="本地视频播放器" Command="{Binding Source={StaticResource  Locator},Path=Main.LocalMusicWinCommand}"></MenuItem>
                 <MenuItem Header="本地音乐播放器" Command="{Binding Source={StaticResource  Locator}}"></MenuItem>
                 <MenuItem Header="本地网络浏览器"></MenuItem>
                 <MenuItem Header="外部视频播放器" Command="{Binding Source={StaticResource  Locator}}">

@@ -13,7 +13,7 @@ namespace SmallTroupManager.View
         public PlayMusicWin()
         {
             InitializeComponent();
-            this.VlcControl;
+            App.Locator.PlayM.Player = this.VlcControl;
         }
 
 

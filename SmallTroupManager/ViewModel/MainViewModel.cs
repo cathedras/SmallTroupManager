@@ -224,7 +224,6 @@ namespace SmallTroupManager.ViewModel
         }
 
 
-
         private ICommand _newActionCommand;
         public ICommand NewActionCommand
         {
@@ -271,6 +270,7 @@ namespace SmallTroupManager.ViewModel
             }));
 
         }
+
         private ICommand _openSettingWindowCommand;
         public ICommand OpenSettingWindowCommand
         {
@@ -283,7 +283,20 @@ namespace SmallTroupManager.ViewModel
             }));
 
         }
-     
+
+        private ICommand _localMusicWin;
+        public ICommand LocalMusicWinCommand
+        {
+            get => _localMusicWin ?? (_localMusicWin = new UtilRelayCommand(delegate (object obj)
+            {
+                App.Locator.PlayM.InitShow(new List<string>());
+            }, pre =>
+            {
+                return true;
+            }));
+
+        }
+
         #endregion
 
 
