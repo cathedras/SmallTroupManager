@@ -79,6 +79,9 @@
     <Compile Include="View\ProgrammeSettingView.xaml.cs">
       <DependentUpon>ProgrammeSettingView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\BigUserViewMode.xaml.cs">
+      <DependentUpon>BigUserViewMode.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\UserView.xaml.cs">
       <DependentUpon>UserView.xaml</DependentUpon>
     </Compile>
@@ -103,6 +106,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\ProgrammeSettingView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\BigUserViewMode.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -159,6 +166,9 @@
     <PackageReference Include="Vlc.DotNet.Wpf">
       <Version>3.0.0</Version>
     </PackageReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\gohome.PNG" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

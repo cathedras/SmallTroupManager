@@ -9,6 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
 using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
@@ -25,9 +26,9 @@ namespace SmallTroupManager.View
     /// <summary>
     /// UserControl1.xaml 的交互逻辑
     /// </summary>
-    public partial class UserControl1 : UserControl,INotifyPropertyChanged
+    public partial class UserView : UserControl,INotifyPropertyChanged
     {
-        public UserControl1()
+        public UserView()
         {
             InitializeComponent();
         }
@@ -92,7 +93,15 @@ namespace SmallTroupManager.View
         /// <param name="e"></param>
         private void ListItemView_OnMouseDown(object sender, MouseButtonEventArgs e)
         {
-            
+            //int index = GetCurrentIndex(new GetPositionDelegate(e.GetPosition));
+            //if (index == -1)
+            {
+                //var sel = CurSelect;
+                //var idx = CurSelectIndex;
+                //sel.CurState = State.Show;
+                //TargetItems.Remove(sel);
+                //TargetItems.Insert(idx, sel);
+            }
         }
         /// <summary>
         /// 回车，保存成显示状态
@@ -167,10 +176,10 @@ namespace SmallTroupManager.View
             switch (o.Name)
             {
                 case "start":
-                    var playLst = new List<string>();
-                    playLst.Add(CurSelect.FileRes);
+                    //var playLst = new List<string>();
+                    //playLst.Add(CurSelect.FileRes);
                     index = TargetItems.IndexOf(CurSelect);
-                    App.Locator.PlayM.NoWindowPlayMusic(playLst, (b) =>
+                    App.Locator.PlayM.NoWindowPlayMusic(CurSelect.FileRes, (b) =>
                     {
                         TargetItems[index].RepTime = b;
                     });
@@ -192,6 +201,94 @@ namespace SmallTroupManager.View
             o.Name = string.Empty;
         }
 
+        private void ListItemView_OnMouseMove(object sender, MouseEventArgs e)
+        {
+            ListView listview = sender as ListView;
+            if (e.LeftButton == MouseButtonState.Pressed)
+            {
+                System.Collections.IList list = listview.SelectedItems as System.Collections.IList;
+                DataObject data = new DataObject(typeof(System.Collections.IList), list);
+                if (list.Count > 0)
+                {
+                    DragDrop.DoDragDrop(listview, data, DragDropEffects.Move);
+                }
+            }
+
+        }
+
+        private void ListItemView_OnDrop(object sender, DragEventArgs e)
+        {
+            try
+            {
+                if (e.Data.GetDataPresent(typeof(System.Collections.IList)))
+                {
+                    System.Collections.IList peopleList = e.Data.GetData(typeof(System.Collections.IList)) as System.Collections.IList;
+                    //index为放置时鼠标下元素项的索引  
+                    int index = GetCurrentIndex(new GetPositionDelegate(e.GetPosition));
+                    if (index > -1)
+                    {
+                        RepertoireItem Logmess = peopleList[0] as RepertoireItem;
+                        //拖动元素集合的第一个元素索引  
+                        int OldFirstIndex = _targetItems.IndexOf(Logmess);
+                        //下边那个循环要求数据源必须为ObservableCollection<T>类型，T为对象  
+                        for (int i = 0; i < peopleList.Count; i++)
+                        {
+                            _targetItems.Move(OldFirstIndex, index);
+                        }
+                        ListItemView.SelectedItems.Clear();
+                    }
+                }
+                else if (e.Data.GetDataPresent(DataFormats.FileDrop))
+                {
+                    e.Effects = DragDropEffects.Link;  //WinForm中为e.Effect = DragDropEffects.Link 
+                    string fileName = ((Array)e.Data.GetData(DataFormats.FileDrop)).GetValue(0).ToString();
+                }
+                else
+                {
+                    e.Effects = DragDropEffects.None; //WinFrom中为e.Effect = DragDropEffects.None
+                }
+            }
+            catch (Exception exception)
+            {
+                _log.Error("[拖放错误]"+exception.Message);
+
+            }
+            
+
+        }
+
+        private int GetCurrentIndex(GetPositionDelegate getPosition)
+        {
+            int index = -1;
+            for (int i = 0; i < ListItemView.Items.Count; ++i)
+            {
+                ListViewItem item = GetListViewItem(i);
+                if (item != null && this.IsMouseOverTarget(item, getPosition))
+                {
+                    index = i;
+                    break;
+                }
+            }
+            return index;
+        }
+
+        private bool IsMouseOverTarget(Visual target, GetPositionDelegate getPosition)
+        {
+            Rect bounds = VisualTreeHelper.GetDescendantBounds(target);
+            Point mousePos = getPosition((IInputElement)target);
+            return bounds.Contains(mousePos);
+        }
+
+        delegate Point GetPositionDelegate(IInputElement element);
+
+        ListViewItem GetListViewItem(int index)
+        {
+            if (ListItemView.ItemContainerGenerator.Status != GeneratorStatus.ContainersGenerated)
+                return null;
+            return ListItemView.ItemContainerGenerator.ContainerFromIndex(index) as ListViewItem;
+        }
+
+
         public event PropertyChangedEventHandler PropertyChanged;
 
         [NotifyPropertyChangedInvocator]
@@ -204,5 +301,8 @@ namespace SmallTroupManager.View
         {
             OnKeyDown?.Invoke(this, e);
         }
+
+
+       
     }
 }

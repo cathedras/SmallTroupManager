@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="SmallTroupManager.View.UserControl1"
+﻿<UserControl x:Class="SmallTroupManager.View.UserView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -14,13 +14,15 @@
     </Control.Resources>
 
     <Grid>
-        <ListView ItemsSource="{Binding RelativeSource={RelativeSource AncestorType=local:UserControl1,AncestorLevel=1},Path=TargetItems}" 
+        <ListView ItemsSource="{Binding RelativeSource={RelativeSource AncestorType=local:UserView,AncestorLevel=1},Path=TargetItems}" 
                   KeyDown="ListItemView_OnKeyDown"
                   MouseDoubleClick="ListItemView_OnMouseDoubleClick" 
                   MouseDown="ListItemView_OnMouseDown"
-                  SelectedItem="{Binding RelativeSource={RelativeSource Mode=FindAncestor,AncestorType=local:UserControl1},Mode=TwoWay ,Path=CurSelect,UpdateSourceTrigger=PropertyChanged}"
+                  SelectedItem="{Binding RelativeSource={RelativeSource Mode=FindAncestor,AncestorType=local:UserView},Mode=TwoWay ,Path=CurSelect,UpdateSourceTrigger=PropertyChanged}"
                   SelectionMode="Extended"
-                  SelectedIndex="{Binding RelativeSource={RelativeSource Mode=FindAncestor,AncestorType=local:UserControl1},Path=CurSelectIndex,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                  SelectedIndex="{Binding RelativeSource={RelativeSource Mode=FindAncestor,AncestorType=local:UserView},Path=CurSelectIndex,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                  MouseMove="ListItemView_OnMouseMove"
+                  Drop="ListItemView_OnDrop"
                   x:Name="ListItemView" FontSize="18" AllowDrop="True" Background="Transparent"
                   >
             <!--<ControlTemplate TargetType="{x:Type GridViewColumnHeader}">
@@ -64,14 +66,6 @@
             </i:Interaction.Triggers>-->
             <ListView.View>
                 <GridView>
-                    <GridViewColumn Header="表演顺序" Width="180" CellTemplateSelector="{StaticResource OrderTemplate}"></GridViewColumn>
-                    <GridViewColumn Header="表演名称" Width="180" CellTemplateSelector="{StaticResource RepNameTemplate}"></GridViewColumn>
-                    <GridViewColumn Header="表演类型" Width="180" CellTemplateSelector="{StaticResource RepTypeTemplate}"></GridViewColumn>
-                    <GridViewColumn Header="表演时长" Width="180" CellTemplateSelector="{StaticResource RepTimeTemplate}"></GridViewColumn>
-                    <GridViewColumn Header="表演者" Width="180" CellTemplateSelector="{StaticResource ActNameTemplate}"></GridViewColumn>
-                    <GridViewColumn Header="背景音乐" Width="180" CellTemplateSelector="{StaticResource RepBgmTemplate}"></GridViewColumn>
-                    <GridViewColumn Header="资源地址" Width="180" CellTemplateSelector="{StaticResource FileResTemplate}"></GridViewColumn>
-                    <GridViewColumn Header="资源播放程序" Width="150" CellTemplateSelector="{StaticResource ProgTypeTemplate}"></GridViewColumn>
                     <GridViewColumn Header="操作" Width="150">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate DataType="{x:Type model:RepertoireItem}">
@@ -87,7 +81,14 @@
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
-                    <GridViewColumn Header="" Width="150" CellTemplateSelector="{StaticResource ProgTypeTemplate}"></GridViewColumn>
+                    <GridViewColumn Header="表演顺序" Width="180" CellTemplateSelector="{StaticResource OrderTemplate}"></GridViewColumn>
+                    <GridViewColumn Header="表演名称" Width="180" CellTemplateSelector="{StaticResource RepNameTemplate}"></GridViewColumn>
+                    <GridViewColumn Header="表演类型" Width="180" CellTemplateSelector="{StaticResource RepTypeTemplate}"></GridViewColumn>
+                    <GridViewColumn Header="表演时长" Width="180" CellTemplateSelector="{StaticResource RepTimeTemplate}"></GridViewColumn>
+                    <GridViewColumn Header="表演者" Width="180" CellTemplateSelector="{StaticResource ActNameTemplate}"></GridViewColumn>
+                    <GridViewColumn Header="背景音乐" Width="180" CellTemplateSelector="{StaticResource RepBgmTemplate}"></GridViewColumn>
+                    <GridViewColumn Header="资源地址" Width="180" CellTemplateSelector="{StaticResource FileResTemplate}"></GridViewColumn>
+                    <GridViewColumn Header="资源播放程序" Width="150" CellTemplateSelector="{StaticResource ProgTypeTemplate}"></GridViewColumn>
                 </GridView>
             </ListView.View>
 

@@ -81,7 +81,7 @@ namespace SmallTroupManager.ViewModel
        /// </summary>
        /// <param name="item"></param>
        /// <param name="title"></param>
-        public void AddAActionFile(List<RepertoireItem> item = null,string title = "Sample")
+        public void AddLayoutPage<T>(Func<T> act=null,string title = "Sample")
         {
             var la = new LayoutAnchorable
             {
@@ -89,28 +89,12 @@ namespace SmallTroupManager.ViewModel
                 Title = title,
                 
             };
-            var uc = new UserControl1();
-        
-            RepertoireItem curadd = null;
-            if (item==null)
-            {
-                curadd = new RepertoireItem(id++, string.Empty, string.Empty,string.Empty, string.Empty, string.Empty, string.Empty, string.Empty,
-                State.Edit);
-                uc.TargetItems.Add(curadd);//默认添加一个
-            }
-            else
-            {
-                foreach (var repertoireItem in item)
-                {
-                    uc.TargetItems.Add(repertoireItem);
-                }
-            }
 
-            var s = uc.TargetItems.Count;
-           
+            var uc = act();
+
             la.Content = uc;
             DocumentPaneView.Children.Add(la);
-            uc.ListItemView.SelectedIndex = s-1;
+            
         }
         /// <summary>
         /// 保存文件到xml文件中
@@ -129,7 +113,7 @@ namespace SmallTroupManager.ViewModel
                 {
                     filePath = sfl.FileName;
                     var con = DocumentPaneView.Children.Select(item => item).Where(item => item.IsSelected);
-                    var lc = (UserControl1)con.LastOrDefault().Content;
+                    var lc = (UserView)con.LastOrDefault().Content;
                     var pXml = new PlainXmlDb(filePath);
                     var list = new List<SaveFileList>();
                     int i = 1;
@@ -175,14 +159,25 @@ namespace SmallTroupManager.ViewModel
                     List<RepertoireItem> itemLst = new List<RepertoireItem>();
                     foreach (var va in allValue)
                     {
-                        var item = new RepertoireItem(va.Order, va.RepName, va.RepType,va.RepTime, va.ActName, va.RepBgm, va.FileRes,
-                            va.ProgType, (State)Enum.Parse(typeof(State), va.CurState)); //默认带播放按钮
+                        var item = new RepertoireItem(va.Order, va.RepName, va.RepType, va.RepTime, va.ActName,
+                            va.RepBgm, va.FileRes,
+                            va.ProgType, (State) Enum.Parse(typeof(State), va.CurState)); //默认带播放按钮
                         itemLst.Add(item);
                     }
-                    AddAActionFile(itemLst,Path.GetFileName(ofdFileName));
+
+                    AddLayoutPage<UserView>(()=>
+                    {
+                        var uc = new UserView();                  
+                        foreach (var repertoireItem in itemLst)
+                        {
+                            uc.TargetItems.Add(repertoireItem);
+                        }
+                        var s = uc.TargetItems.Count;
+                        uc.ListItemView.SelectedIndex = s - 1;
+                        return uc;
+                    },Path.GetFileName(ofdFileName));
                 }
             }
-
         }
 
 
@@ -200,7 +195,12 @@ namespace SmallTroupManager.ViewModel
             get => _openFileCommand ?? (_openFileCommand = new RelayCommand(() =>
             {
                 LoadFile();
-
+                
+                //AddLayoutPage<BigUserViewMode>(() =>
+                //{
+                //    var userView = new BigUserViewMode();
+                //    return userView;
+                //},"test");
             }));
         }
 
@@ -229,7 +229,16 @@ namespace SmallTroupManager.ViewModel
         {
             get => _newActionCommand ?? (_newActionCommand = new RelayCommand(() =>
             {
-                AddAActionFile();
+                AddLayoutPage<UserView>(() => {
+                    var uc = new UserView();
+                    RepertoireItem curadd = null;
+                    curadd = new RepertoireItem(id++, string.Empty, string.Empty, string.Empty, string.Empty, string.Empty, string.Empty, string.Empty,
+                            State.Edit);
+                    uc.TargetItems.Add(curadd);//默认添加一个
+                    var s = uc.TargetItems.Count;
+                    uc.ListItemView.SelectedIndex = s - 1;
+                    return uc;
+                },"sample");
             }));
         }
 
