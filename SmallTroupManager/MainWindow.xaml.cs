@@ -42,13 +42,17 @@ namespace SmallTroupManager
 
         protected override void OnClosing(CancelEventArgs e)
         {
-            //base.OnClosing(e);
+            base.OnClosing(e);
         }
 
         private void DocumentPane_OnPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
             var s = (LayoutDocumentPane) sender;
-            App.Locator.Main.SelectedIndex = s.SelectedContentIndex;
+            if (s.SelectedContentIndex != -1)
+            {
+                App.Locator.Main.SelectedIndex = s.SelectedContentIndex;
+            }
+
         }
     }
 }

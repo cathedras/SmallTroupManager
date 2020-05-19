@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
@@ -20,6 +21,7 @@ using System.Windows.Shapes;
 using log4net;
 using SmallTroupManager.Annotations;
 using SmallTroupManager.Model;
+using Xceed.Wpf.AvalonDock.Controls;
 
 namespace SmallTroupManager.View
 {
@@ -47,10 +49,11 @@ namespace SmallTroupManager.View
         private ObservableCollection<RepertoireItem> _targetItems;
         private RepertoireItem _curSelect;
         private int _curSelectIndex;
+
         private ILog _log = LogManager.GetLogger("logfile");
         private bool _isNoUpdate = true;
-       
-        
+     
+
         public ObservableCollection<RepertoireItem> TargetItems
         {
             get => _targetItems??(_targetItems=new ObservableCollection<RepertoireItem>());
@@ -84,8 +87,8 @@ namespace SmallTroupManager.View
                 _isNoUpdate = value;
             }
         }
-
-
+        public int LastEditIndex { get; set; }
+        public bool IsFirstLoad { get; set; }
         /// <summary>
         /// 选择当前需要修改的项目
         /// </summary>
@@ -119,12 +122,12 @@ namespace SmallTroupManager.View
                     sel.CurState = State.Show;
                     TargetItems.Remove(TargetItems.Last());
                     TargetItems.Add(sel);
-                    TargetItems.Add(new RepertoireItem(App.Locator.Main.id++, string.Empty, string.Empty,string.Empty, string.Empty,
+                    TargetItems.Add(new RepertoireItem(LastEditIndex++, string.Empty, string.Empty,string.Empty, string.Empty,
                         string.Empty, string.Empty, string.Empty, State.Edit));
                 }
                 else
                 {
-                    var idx = CurSelectIndex;
+                    var idx = CurSelectIndex == LastEditIndex ? LastEditIndex : CurSelectIndex;
                     sel.CurState = State.Show;
                     TargetItems.Remove(sel);
                     TargetItems.Insert(idx,sel);
@@ -146,6 +149,15 @@ namespace SmallTroupManager.View
         /// <param name="e"></param>
         private void ListItemView_OnMouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
+            GridView gv = ListItemView.View as GridView;
+            //ListViewItem lvitem = this.listView1.GetItemAt(e.X, e.Y);
+            //intSendMessage = SendMessage(this.listView1.Handle, LVM_GETSUBITEMRECT, lvitem.Index, ref myrect);
+            if (IsMouseOverColumn(gv.Columns[0], new GetPositionDelegate(e.GetPosition)))
+            {
+                return;
+            }
+
+
             var sel = CurSelect;
             if (sel.CurState == State.Show)
             {
@@ -173,21 +185,23 @@ namespace SmallTroupManager.View
         {
             var o = (Button)e.OriginalSource;
             _log.Debug("点击得到的对象："+e.Source+$",{sender}");
+            var param = (int)o.CommandParameter;
+            CurSelectIndex = param - 1;
             switch (o.Name)
             {
                 case "start":
                     //var playLst = new List<string>();
                     //playLst.Add(CurSelect.FileRes);
                     index = TargetItems.IndexOf(CurSelect);
-                    App.Locator.PlayM.NoWindowPlayMusic(CurSelect.FileRes, (b) =>
-                    {
-                        TargetItems[index].RepTime = b;
-                    });
+                    //App.Locator.PlayM.NoWindowPlayMusic(CurSelect.FileRes, (b) =>
+                    //{
+                    //    TargetItems[index].RepTime = b;
+                    //});
                     TargetItems[index].Stop = Visibility.Visible;
                     TargetItems[index].Start = Visibility.Collapsed;
                     break;
                 case "stop":
-                    App.Locator.PlayM.StopPlay();
+                    //App.Locator.PlayM.StopPlay();
                     CurSelect = TargetItems[index];
                     TargetItems[index].Stop = Visibility.Collapsed;
                     TargetItems[index].Start = Visibility.Visible;
@@ -198,19 +212,21 @@ namespace SmallTroupManager.View
                 default:
                     break;
             }
-            o.Name = string.Empty;
         }
 
         private void ListItemView_OnMouseMove(object sender, MouseEventArgs e)
         {
             ListView listview = sender as ListView;
-            if (e.LeftButton == MouseButtonState.Pressed)
+            if (e.LeftButton == MouseButtonState.Pressed && CurSelect!=null)
             {
-                System.Collections.IList list = listview.SelectedItems as System.Collections.IList;
-                DataObject data = new DataObject(typeof(System.Collections.IList), list);
-                if (list.Count > 0)
+                if (CurSelect.CurState == State.Show)
                 {
-                    DragDrop.DoDragDrop(listview, data, DragDropEffects.Move);
+                    IList list = listview.SelectedItems as IList;
+                    DataObject data = new DataObject(typeof(IList), list);
+                    if (list.Count > 0)
+                    {
+                        DragDrop.DoDragDrop(listview, data, DragDropEffects.Move);
+                    }
                 }
             }
 
@@ -220,41 +236,48 @@ namespace SmallTroupManager.View
         {
             try
             {
-                if (e.Data.GetDataPresent(typeof(System.Collections.IList)))
+                if (!IsFirstLoad)
                 {
-                    System.Collections.IList peopleList = e.Data.GetData(typeof(System.Collections.IList)) as System.Collections.IList;
-                    //index为放置时鼠标下元素项的索引  
-                    int index = GetCurrentIndex(new GetPositionDelegate(e.GetPosition));
-                    if (index > -1)
+                    if (e.Data.GetDataPresent(typeof(IList)))
                     {
-                        RepertoireItem Logmess = peopleList[0] as RepertoireItem;
-                        //拖动元素集合的第一个元素索引  
-                        int OldFirstIndex = _targetItems.IndexOf(Logmess);
-                        //下边那个循环要求数据源必须为ObservableCollection<T>类型，T为对象  
-                        for (int i = 0; i < peopleList.Count; i++)
+                        IList peopleList = e.Data.GetData(typeof(IList)) as IList;
+                        //index为放置时鼠标下元素项的索引  
+                        int index = GetCurrentIndex(new GetPositionDelegate(e.GetPosition));
+                        if (index > -1 && index < _targetItems.Count)
                         {
-                            _targetItems.Move(OldFirstIndex, index);
+                            RepertoireItem oldObjItem = peopleList[0] as RepertoireItem;
+                            //拖动元素集合的第一个元素索引  
+                            int oldFirstIndex = _targetItems.IndexOf(oldObjItem);
+                            //下边那个循环要求数据源必须为ObservableCollection<T>类型，T为对象  
+                            for (int i = 0; i < peopleList.Count; i++)
+                            {
+                                _targetItems.Move(oldFirstIndex, index);
+                            }
+                            ListItemView.SelectedItems.Clear();
+                            for (int i = 0; i < _targetItems.Count; i++)
+                            {
+                                _targetItems[i].Order = i + 1;
+                            }
                         }
-                        ListItemView.SelectedItems.Clear();
+                    }
+                    else if (e.Data.GetDataPresent(DataFormats.FileDrop))
+                    {
+                        e.Effects = DragDropEffects.Link;  //WinForm中为e.Effect = DragDropEffects.Link 
+                        string fileName = ((Array)e.Data.GetData(DataFormats.FileDrop))?.GetValue(0).ToString();
+                        App.Locator.Main.LoadFile(fileName);
+                    }
+                    else
+                    {
+                        e.Effects = DragDropEffects.None; //WinFrom中为e.Effect = DragDropEffects.None
                     }
                 }
-                else if (e.Data.GetDataPresent(DataFormats.FileDrop))
-                {
-                    e.Effects = DragDropEffects.Link;  //WinForm中为e.Effect = DragDropEffects.Link 
-                    string fileName = ((Array)e.Data.GetData(DataFormats.FileDrop)).GetValue(0).ToString();
-                }
-                else
-                {
-                    e.Effects = DragDropEffects.None; //WinFrom中为e.Effect = DragDropEffects.None
-                }
+
+                IsFirstLoad = false;
             }
             catch (Exception exception)
             {
                 _log.Error("[拖放错误]"+exception.Message);
-
             }
-            
-
         }
 
         private int GetCurrentIndex(GetPositionDelegate getPosition)
@@ -263,7 +286,7 @@ namespace SmallTroupManager.View
             for (int i = 0; i < ListItemView.Items.Count; ++i)
             {
                 ListViewItem item = GetListViewItem(i);
-                if (item != null && this.IsMouseOverTarget(item, getPosition))
+                if (item != null && IsMouseOverTarget(item, getPosition))
                 {
                     index = i;
                     break;
@@ -271,6 +294,21 @@ namespace SmallTroupManager.View
             }
             return index;
         }
+
+        private bool IsMouseOverColumn(GridViewColumn column,GetPositionDelegate getPosition)
+        {
+            var col = GetColumnItem(column);
+            if (col != null)
+            {
+                return IsMouseOverTarget(col, getPosition);
+            }
+
+            return false;
+
+        }
+
+
+
 
         private bool IsMouseOverTarget(Visual target, GetPositionDelegate getPosition)
         {
@@ -281,12 +319,21 @@ namespace SmallTroupManager.View
 
         delegate Point GetPositionDelegate(IInputElement element);
 
-        ListViewItem GetListViewItem(int index)
+        private ListViewItem GetListViewItem(int index)
         {
             if (ListItemView.ItemContainerGenerator.Status != GeneratorStatus.ContainersGenerated)
                 return null;
             return ListItemView.ItemContainerGenerator.ContainerFromIndex(index) as ListViewItem;
         }
+
+        private ListViewItem GetColumnItem(object item)
+        {
+            GridView gv = ListItemView.View as GridView;
+            if (ListItemView.ItemContainerGenerator.Status != GeneratorStatus.ContainersGenerated)
+                return null;
+            return item as ListViewItem;
+        }
+
 
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -303,6 +350,39 @@ namespace SmallTroupManager.View
         }
 
 
-       
+        //private void Start_OnClick(object sender, RoutedEventArgs e)
+        //{
+        //    var o = (Button)e.OriginalSource;
+        //    _log.Debug("点击得到的对象：" + e.Source + $",{sender}");
+        //    var param = (int)o.CommandParameter;
+        //    CurSelectIndex = param - 1;
+        //    index = TargetItems.IndexOf(CurSelect);
+        //    //App.Locator.PlayM.NoWindowPlayMusic(CurSelect.FileRes, (b) =>
+        //    //{
+        //    //    TargetItems[index].RepTime = b;
+        //    //});
+        //    TargetItems[index].Stop = Visibility.Visible;
+        //    TargetItems[index].Start = Visibility.Collapsed;
+        //}
+
+        //private void Stop_OnClick(object sender, RoutedEventArgs e)
+        //{
+        //    var o = (Button)e.OriginalSource;
+        //    _log.Debug("点击得到的对象：" + e.Source + $",{sender}");
+        //    var param = (int)o.CommandParameter;
+        //    CurSelectIndex = param - 1;
+        //    CurSelect = TargetItems[index];
+        //    TargetItems[index].Stop = Visibility.Collapsed;
+        //    TargetItems[index].Start = Visibility.Visible;
+        //}
+
+        //private void Del_OnClick(object sender, RoutedEventArgs e)
+        //{
+        //    var o = (Button)e.OriginalSource;
+        //    _log.Debug("点击得到的对象：" + e.Source + $",{sender}");
+        //    var param = (int)o.CommandParameter;
+        //    CurSelectIndex = param - 1;
+        //    TargetItems.Remove(CurSelect);
+        //}
     }
 }

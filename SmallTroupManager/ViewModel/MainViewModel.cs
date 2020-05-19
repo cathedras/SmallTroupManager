@@ -37,7 +37,7 @@ namespace SmallTroupManager.ViewModel
     {
         private ILog _log = LogManager.GetLogger("logfile");
         private LayoutDocumentPane _documentPaneView;
-        private int _selectedIndex;
+        private int _selectedIndex=-1;
         private Gbl _gbl;
 
 
@@ -81,7 +81,7 @@ namespace SmallTroupManager.ViewModel
        /// </summary>
        /// <param name="item"></param>
        /// <param name="title"></param>
-        public void AddLayoutPage<T>(Func<T> act=null,string title = "Sample")
+        public void UpdateLayoutPage<T>(Func<T> act=null,string title = "Sample")
         {
             var la = new LayoutAnchorable
             {
@@ -89,13 +89,27 @@ namespace SmallTroupManager.ViewModel
                 Title = title,
                 
             };
-
+            la.Closed += La_Closed;
             var uc = act();
 
             la.Content = uc;
-            DocumentPaneView.Children.Add(la);
-            
+            if (SelectedIndex!=-1)
+            {
+                DocumentPaneView.Children[SelectedIndex] = la;
+                DocumentPaneView.SelectedContentIndex = SelectedIndex;
+            }
+            else
+            {
+                DocumentPaneView.Children.Add(la);
+            }
         }
+
+        private void La_Closed(object sender, EventArgs e)
+        {
+            //throw new NotImplementedException();
+            SelectedIndex = -1;
+        }
+
         /// <summary>
         /// 保存文件到xml文件中
         /// </summary>
@@ -138,52 +152,68 @@ namespace SmallTroupManager.ViewModel
                 }
             }
         }
-        /// <summary>
-        /// 加载本地文件
-        /// </summary>
-        public void LoadFile()
-        {
-            var ofd = new OpenFileDialog()
-            {
-                Filter = "STM|*.stm|All|*.*"
-            };
-            var res = ofd.ShowDialog();
-            if (res.HasValue)
-            {
-                foreach (var ofdFileName in ofd.FileNames)
-                {
-                    var pXml = new PlainXmlDb(ofdFileName);
-                    var allValue = new List<SaveFileList>();
-                    pXml.LoadObjListFromDb("File", ref allValue);
 
-                    List<RepertoireItem> itemLst = new List<RepertoireItem>();
+        /// <summary>
+        /// 通过打开窗口加载本地文件
+        /// </summary>
+        public void LoadFile(string fileName)
+        {
+            if (string.IsNullOrEmpty(fileName))
+            {
+                var ofd = new OpenFileDialog()
+                {
+                    Filter = "STM|*.stm|All|*.*"
+                };
+                var res = ofd.ShowDialog();
+                if (res.HasValue)
+                {
+                    fileName = ofd.FileName;
+                }
+                else
+                {
+                    return;
+                }
+            }
+            else
+            {
+                if (!fileName.EndsWith(".stm"))
+                {
+                    return;
+                }
+            }
+
+            if (!string.IsNullOrEmpty(fileName))
+            {
+                var pXml = new PlainXmlDb(fileName);
+                var allValue = new List<SaveFileList>();
+                pXml.LoadObjListFromDb("File", ref allValue);
+                var idx = 1;
+                UpdateLayoutPage<UserView>(() =>
+                {
+                    var uc = new UserView();
                     foreach (var va in allValue)
                     {
                         var item = new RepertoireItem(va.Order, va.RepName, va.RepType, va.RepTime, va.ActName,
                             va.RepBgm, va.FileRes,
-                            va.ProgType, (State) Enum.Parse(typeof(State), va.CurState)); //默认带播放按钮
-                        itemLst.Add(item);
+                            va.ProgType, (State)Enum.Parse(typeof(State), va.CurState)); //默认带播放按钮
+                        uc.TargetItems.Add(item);
+                        idx++;
                     }
 
-                    AddLayoutPage<UserView>(()=>
-                    {
-                        var uc = new UserView();                  
-                        foreach (var repertoireItem in itemLst)
-                        {
-                            uc.TargetItems.Add(repertoireItem);
-                        }
-                        var s = uc.TargetItems.Count;
-                        uc.ListItemView.SelectedIndex = s - 1;
-                        return uc;
-                    },Path.GetFileName(ofdFileName));
-                }
+                    var s = uc.TargetItems.Count;
+                    uc.ListItemView.SelectedIndex = s - 1;
+                    uc.LastEditIndex = idx;
+                    uc.IsFirstLoad = true;
+                    return uc;
+                }, Path.GetFileName(fileName));
             }
         }
 
 
+
         public void OnCloseWindow()
         {
-            _gbl.Save("SMT.ini", typeof(Gbl));
+            //_gbl.Save("SMT.ini", typeof(Gbl));
         }
         #endregion
 
@@ -194,7 +224,7 @@ namespace SmallTroupManager.ViewModel
         {
             get => _openFileCommand ?? (_openFileCommand = new RelayCommand(() =>
             {
-                LoadFile();
+                LoadFile(string.Empty);
                 
                 //AddLayoutPage<BigUserViewMode>(() =>
                 //{
@@ -229,7 +259,8 @@ namespace SmallTroupManager.ViewModel
         {
             get => _newActionCommand ?? (_newActionCommand = new RelayCommand(() =>
             {
-                AddLayoutPage<UserView>(() => {
+                SelectedIndex = -1;
+                UpdateLayoutPage<UserView>(() => {
                     var uc = new UserView();
                     RepertoireItem curadd = null;
                     curadd = new RepertoireItem(id++, string.Empty, string.Empty, string.Empty, string.Empty, string.Empty, string.Empty, string.Empty,

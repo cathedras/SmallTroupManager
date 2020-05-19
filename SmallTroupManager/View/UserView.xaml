@@ -71,12 +71,12 @@
                             <DataTemplate DataType="{x:Type model:RepertoireItem}">
                                 <WrapPanel>
                                     <!--<res:ButtonEx Content="删除" Icon="/Resources/play.png" Margin="10" ButtonType="IconText"/>-->
-                                    <Button Template="{StaticResource ButtonControlTemplate1}" Click="ButtonBase_OnClick" TabIndex="-1" Name="start"  Width="30" Height="30"
+                                    <Button Template="{StaticResource ButtonControlTemplate1}" CommandParameter="{Binding Order}" Click="ButtonBase_OnClick" TabIndex="-1" x:Name="start"  Width="30" Height="30"
                                             Visibility="{Binding Start,UpdateSourceTrigger=PropertyChanged}"
                                             Margin="20,0,0,0"></Button>
-                                    <Button Template="{StaticResource ButtonControlTemplate2}" Click="ButtonBase_OnClick" TabIndex="-1" Name="stop"  Width="30" Height="30"
+                                    <Button Template="{StaticResource ButtonControlTemplate2}" CommandParameter="{Binding Order}" Click="ButtonBase_OnClick" TabIndex="-1" x:Name="stop"  Width="30" Height="30"
                                             Visibility="{Binding Stop,UpdateSourceTrigger=PropertyChanged}"  Margin="20,0,0,0"></Button>
-                                    <Button Template="{StaticResource ButtonControlTemplate3}" Click="ButtonBase_OnClick" TabIndex="-1" Name="del"  Width="30" Height="30" Margin="20,0,0,0"></Button>
+                                    <Button Template="{StaticResource ButtonControlTemplate3}" CommandParameter="{Binding Order}" Click="ButtonBase_OnClick" TabIndex="-1" x:Name="del"  Width="30" Height="30" Margin="20,0,0,0"></Button>
                                 </WrapPanel>
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>

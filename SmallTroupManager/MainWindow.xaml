@@ -87,11 +87,11 @@
             <Button Margin="3" Background="Transparent" BorderBrush="Transparent" Content="开始演出" Command="{Binding Source={StaticResource  Locator}}"></Button>
         </WrapPanel>
 
-        <avaDock:DockingManager  x:Name="DockingManager" Grid.Column="0" Grid.Row="3" Foreground="Transparent" Background="#FFE89898" OpacityMask="{DynamicResource {x:Static SystemColors.HotTrackBrushKey}}">
+        <avaDock:DockingManager  x:Name="DockingManager" Grid.Column="0" Grid.Row="3" Foreground="Transparent" Background="#FFE89898" OpacityMask="{DynamicResource {x:Static SystemColors.AppWorkspaceColor}}">
             <avaDock:LayoutRoot>
                 <avaDock:LayoutPanel Orientation="Vertical">
                     <avaDock:LayoutPanel.Children>
-                        <avaDock:LayoutDocumentPane x:Name="DocumentPane" PropertyChanged="DocumentPane_OnPropertyChanged"></avaDock:LayoutDocumentPane>
+                        <avaDock:LayoutDocumentPane x:Name="DocumentPane" SelectedContentIndex="0" PropertyChanged="DocumentPane_OnPropertyChanged"></avaDock:LayoutDocumentPane>
                     </avaDock:LayoutPanel.Children>
                 </avaDock:LayoutPanel>
             </avaDock:LayoutRoot>
