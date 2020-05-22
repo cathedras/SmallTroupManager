@@ -59,8 +59,8 @@ namespace SmallTroupManager.ViewModel
         public MainViewModel()
         {
             _log.Debug("应用程序启动！");
-            _gbl = new Gbl();
-            _gbl.LoadGbl<Gbl>("SMT.ini");
+            //_gbl = new Gbl();
+            //_gbl.LoadGbl<Gbl>("SMT.ini");
             ////if (IsInDesignMode)
             ////{
             ////    // Code runs in Blend --> create design time data.
@@ -281,6 +281,7 @@ namespace SmallTroupManager.ViewModel
                
             }));
         }
+
         private ICommand _openExeCommand;
         public ICommand OpenExeCommand
         {
@@ -300,9 +301,7 @@ namespace SmallTroupManager.ViewModel
                             //需要后期修改到设置中
                             Process.Start(fileName);
                         }
-                       
                     }
-                    
                 }
             }, pre =>
             {

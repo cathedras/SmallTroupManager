@@ -5,96 +5,96 @@
     <local:ListColTemp x:Key="OrderTemplate">
         <local:ListColTemp.EditTemplate>
             <DataTemplate  DataType="{x:Type model:RepertoireItem}">
-                <TextBlock Text="{Binding Order}" Height="25"  Width="180"></TextBlock>
+                <TextBlock x:Name="OrderShowEdit" Text="{Binding Order}" Height="25"  Width="180"></TextBlock>
             </DataTemplate>
         </local:ListColTemp.EditTemplate>
         <local:ListColTemp.ShowTemplate>
             <DataTemplate DataType="{x:Type model:RepertoireItem}">
-                <TextBlock Text="{Binding Order}" Height="25" Width="180"></TextBlock>
+                <TextBlock x:Name="OrderShowTxt" Text="{Binding Order}" Height="25" Width="180"></TextBlock>
             </DataTemplate>
         </local:ListColTemp.ShowTemplate>
     </local:ListColTemp>
     <local:ListColTemp x:Key="RepNameTemplate">
         <local:ListColTemp.EditTemplate>
             <DataTemplate  DataType="{x:Type model:RepertoireItem}">
-                <TextBox Text="{Binding RepName}" Height="25"  Width="180" Focusable="True" ForceCursor="True"></TextBox>
+                <TextBox x:Name="RepNameEdit" Text="{Binding RepName}" Height="25"  Width="180" Focusable="True" ForceCursor="True"></TextBox>
             </DataTemplate>
         </local:ListColTemp.EditTemplate>
         <local:ListColTemp.ShowTemplate>
             <DataTemplate DataType="{x:Type model:RepertoireItem}">
-                <TextBlock Text="{Binding RepName}" Height="25" Width="180"></TextBlock>
+                <TextBlock x:Name="RepNameTxt" Text="{Binding RepName}" Height="25" Width="180"></TextBlock>
             </DataTemplate>
         </local:ListColTemp.ShowTemplate>
     </local:ListColTemp>
     <local:ListColTemp x:Key="RepTypeTemplate">
         <local:ListColTemp.EditTemplate>
             <DataTemplate  DataType="{x:Type model:RepertoireItem}">
-                <TextBox Text="{Binding RepType}" Height="25"  Width="180"></TextBox>
+                <TextBox x:Name="RepTypeEdit" Text="{Binding RepType}" Height="25"  Width="180"></TextBox>
             </DataTemplate>
         </local:ListColTemp.EditTemplate>
         <local:ListColTemp.ShowTemplate>
             <DataTemplate DataType="{x:Type model:RepertoireItem}">
-                <TextBlock Text="{Binding RepType}" Height="25" Width="180"></TextBlock>
+                <TextBlock x:Name="RepTypeTxt" Text="{Binding RepType}" Height="25" Width="180"></TextBlock>
             </DataTemplate>
         </local:ListColTemp.ShowTemplate>
     </local:ListColTemp>
     <local:ListColTemp x:Key="RepTimeTemplate">
         <local:ListColTemp.EditTemplate>
             <DataTemplate  DataType="{x:Type model:RepertoireItem}">
-                <TextBox Text="{Binding RepTime}" Height="25"  Width="180"></TextBox>
+                <TextBox x:Name="RepTimeEdit" Text="{Binding RepTime}" Height="25"  Width="180"></TextBox>
             </DataTemplate>
         </local:ListColTemp.EditTemplate>
         <local:ListColTemp.ShowTemplate>
             <DataTemplate DataType="{x:Type model:RepertoireItem}">
-                <TextBlock Text="{Binding RepTime}" Height="25" Width="180"></TextBlock>
+                <TextBlock x:Name="RepTimeTxt" Text="{Binding RepTime}" Height="25" Width="180"></TextBlock>
             </DataTemplate>
         </local:ListColTemp.ShowTemplate>
     </local:ListColTemp>
     <local:ListColTemp x:Key="ActNameTemplate">
         <local:ListColTemp.EditTemplate>
             <DataTemplate  DataType="{x:Type model:RepertoireItem}">
-                <TextBox Text="{Binding ActName}" Height="25"  Width="180"></TextBox>
+                <TextBox x:Name="ActNameEdit" Text="{Binding ActName}" Height="25"  Width="180"></TextBox>
             </DataTemplate>
         </local:ListColTemp.EditTemplate>
         <local:ListColTemp.ShowTemplate>
             <DataTemplate DataType="{x:Type model:RepertoireItem}">
-                <TextBlock Text="{Binding ActName}" Height="25" Width="180"></TextBlock>
+                <TextBlock x:Name="ActNameTxt" Text="{Binding ActName}" Height="25" Width="180"></TextBlock>
             </DataTemplate>
         </local:ListColTemp.ShowTemplate>
     </local:ListColTemp>
     <local:ListColTemp x:Key="RepBgmTemplate">
         <local:ListColTemp.EditTemplate>
             <DataTemplate  DataType="{x:Type model:RepertoireItem}">
-                <TextBox Text="{Binding RepBgm}" Height="25"  Width="180"></TextBox>
+                <TextBox x:Name="RepBgmEdit" Text="{Binding RepBgm}" Height="25"  Width="180"></TextBox>
             </DataTemplate>
         </local:ListColTemp.EditTemplate>
         <local:ListColTemp.ShowTemplate>
             <DataTemplate DataType="{x:Type model:RepertoireItem}">
-                <TextBlock Text="{Binding RepBgm}" Height="25" Width="180"></TextBlock>
+                <TextBlock x:Name="RepBgmTxt" Text="{Binding RepBgm}" Height="25" Width="180"></TextBlock>
             </DataTemplate>
         </local:ListColTemp.ShowTemplate>
     </local:ListColTemp>
     <local:ListColTemp x:Key="FileResTemplate">
         <local:ListColTemp.EditTemplate>
             <DataTemplate  DataType="{x:Type model:RepertoireItem}">
-                <TextBox Text="{Binding FileRes}" Height="25"  Width="180"></TextBox>
+                <TextBox x:Name="FileResEdit" Text="{Binding FileRes}" Height="25"  Width="180"></TextBox>
             </DataTemplate>
         </local:ListColTemp.EditTemplate>
         <local:ListColTemp.ShowTemplate>
             <DataTemplate DataType="{x:Type model:RepertoireItem}">
-                <TextBlock Text="{Binding FileRes}" Height="25" Width="180"></TextBlock>
+                <TextBlock x:Name="FileResTxt" Text="{Binding FileRes}" Height="25" Width="180"></TextBlock>
             </DataTemplate>
         </local:ListColTemp.ShowTemplate>
     </local:ListColTemp>
     <local:ListColTemp x:Key="ProgTypeTemplate">
         <local:ListColTemp.EditTemplate>
             <DataTemplate  DataType="{x:Type model:RepertoireItem}">
-                <TextBox Text="{Binding ProgType}" Height="25"  Width="180"></TextBox>
+                <TextBox x:Name="ProgTypeEdit" Text="{Binding ProgType}" Height="25"  Width="180"></TextBox>
             </DataTemplate>
         </local:ListColTemp.EditTemplate>
         <local:ListColTemp.ShowTemplate>
             <DataTemplate DataType="{x:Type model:RepertoireItem}">
-                <TextBlock Text="{Binding ProgType}" Height="25" Width="180"></TextBlock>
+                <TextBlock x:Name="ProgTypeTxt" Text="{Binding ProgType}" Height="25" Width="180"></TextBlock>
             </DataTemplate>
         </local:ListColTemp.ShowTemplate>
     </local:ListColTemp>

@@ -10,7 +10,7 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="1700">
     <Control.Resources>
-       <ResourceDictionary Source="../Resources/ListColItemResource.xaml"></ResourceDictionary>
+       <ResourceDictionary x:Name="templateSrc" Source="../Resources/ListColItemResource.xaml"></ResourceDictionary>
     </Control.Resources>
 
     <Grid>
@@ -81,14 +81,14 @@
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
-                    <GridViewColumn Header="表演顺序" Width="180" CellTemplateSelector="{StaticResource OrderTemplate}"></GridViewColumn>
-                    <GridViewColumn Header="表演名称" Width="180" CellTemplateSelector="{StaticResource RepNameTemplate}"></GridViewColumn>
-                    <GridViewColumn Header="表演类型" Width="180" CellTemplateSelector="{StaticResource RepTypeTemplate}"></GridViewColumn>
-                    <GridViewColumn Header="表演时长" Width="180" CellTemplateSelector="{StaticResource RepTimeTemplate}"></GridViewColumn>
-                    <GridViewColumn Header="表演者" Width="180" CellTemplateSelector="{StaticResource ActNameTemplate}"></GridViewColumn>
-                    <GridViewColumn Header="背景音乐" Width="180" CellTemplateSelector="{StaticResource RepBgmTemplate}"></GridViewColumn>
-                    <GridViewColumn Header="资源地址" Width="180" CellTemplateSelector="{StaticResource FileResTemplate}"></GridViewColumn>
-                    <GridViewColumn Header="资源播放程序" Width="150" CellTemplateSelector="{StaticResource ProgTypeTemplate}"></GridViewColumn>
+                    <GridViewColumn x:Name="OrderCol" Header="表演顺序" Width="180" CellTemplateSelector="{StaticResource OrderTemplate}"></GridViewColumn>
+                    <GridViewColumn x:Name="RepNameCol" Header="表演名称" Width="180" CellTemplateSelector="{StaticResource RepNameTemplate}"></GridViewColumn>
+                    <GridViewColumn x:Name="RepTypeCol" Header="表演类型" Width="180" CellTemplateSelector="{StaticResource RepTypeTemplate}"></GridViewColumn>
+                    <GridViewColumn x:Name="RepTimeCol" Header="表演时长" Width="180" CellTemplateSelector="{StaticResource RepTimeTemplate}"></GridViewColumn>
+                    <GridViewColumn x:Name="ActNameCol" Header="表演者" Width="180" CellTemplateSelector="{StaticResource ActNameTemplate}"></GridViewColumn>
+                    <GridViewColumn x:Name="BgmCol" Header="背景音乐" Width="180" CellTemplateSelector="{StaticResource RepBgmTemplate}"></GridViewColumn>
+                    <GridViewColumn x:Name="FileResCol" Header="资源地址" Width="180" CellTemplateSelector="{StaticResource FileResTemplate}"></GridViewColumn>
+                    <GridViewColumn x:Name="ProgTypeCol" Header="资源播放程序" Width="150" CellTemplateSelector="{StaticResource ProgTypeTemplate}"></GridViewColumn>
                 </GridView>
             </ListView.View>
 
