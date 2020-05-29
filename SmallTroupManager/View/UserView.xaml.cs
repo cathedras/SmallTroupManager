@@ -24,6 +24,7 @@ using SmallTroupManager.Annotations;
 using SmallTroupManager.Model;
 using SmallTroupManager.Resources;
 using Xceed.Wpf.AvalonDock.Controls;
+using ListViewLayoutManagerLib;
 
 namespace SmallTroupManager.View
 {
@@ -35,7 +36,10 @@ namespace SmallTroupManager.View
         public UserView()
         {
             InitializeComponent();
+            ListViewLayoutManager.ReAction = this.ReAction;
         }
+
+       
 #if DEBUG
         private string _testMovieOne = "F:\\wpf\\SmallTroupManager\\TestData\\Video\\Rescue Emergency.mp4";
         private string _testMovieTwo = "F:\\wpf\\SmallTroupManager\\TestData\\Video\\war of future.mp4";
@@ -113,7 +117,7 @@ namespace SmallTroupManager.View
         private void ListItemView_OnMouseDown(object sender, MouseButtonEventArgs e)
         {
             //var txt = templateSrc.FindName("OrderShowEdit") as TextBlock;
-            
+            Console.WriteLine("header:"+OrderCol.ActualWidth);
             
             
           //  Console.WriteLine(txt.Text);
@@ -145,9 +149,13 @@ namespace SmallTroupManager.View
                     sel.CurState = State.Show;
                     TargetItems.Remove(TargetItems.Last());
                     TargetItems.Add(sel);
-                    TargetItems.Add(new RepertoireItem(LastEditIndex++, string.Empty, string.Empty, string.Empty,
+                    var item = new RepertoireItem(LastEditIndex++, string.Empty, string.Empty, string.Empty,
                         string.Empty,
-                        string.Empty, string.Empty, string.Empty, State.Edit));
+                        string.Empty, string.Empty, string.Empty, State.Edit);
+                    item.SetEveryColumnWidth(120, 180, 180, 180, 180, 180, 180, 180);
+                    SetColWidth(120, 180, 180, 180, 180, 180, 180, 180);
+                    TargetItems.Add(item);
+
                 }
                 else
                 {
@@ -318,7 +326,49 @@ namespace SmallTroupManager.View
 
         #endregion
 
+        #region PublicFunction
+
+
+        public void SetColWidth(int orderWidth, int reqNameWidth, int repTimeWidth, int repTypeWidth, int actNameWidth, int repBgmWidth, int fileResWidth, int progTypeWidth)
+        {
+            OrderCol.Width = orderWidth;
+            RepNameCol.Width = reqNameWidth;
+            RepTimeCol.Width = repTimeWidth;
+            RepTypeCol.Width = repTypeWidth;
+            ActNameCol.Width = actNameWidth;
+            BgmCol.Width = repBgmWidth;
+            FileResCol.Width = fileResWidth;
+            ProgTypeCol.Width = progTypeWidth;
+        }
+
+        #endregion
+
         #region PrivateFunction
+
+        private void ReAction(GridViewColumn obj)
+        {
+            foreach (var item in TargetItems)
+            {
+                if ((GridViewColumnHeader)OrderCol.Header == obj.Header)
+                    item.SetEveryColumnWidth(obj.Width, 0, 0, 0, 0, 0, 0, 0);
+                if((GridViewColumnHeader)RepNameCol.Header == obj.Header)
+                    item.SetEveryColumnWidth(0, obj.Width, 0, 0, 0, 0, 0, 0);
+                if ((GridViewColumnHeader)RepTimeCol.Header == obj.Header)
+                    item.SetEveryColumnWidth(0, 0, obj.Width, 0, 0, 0, 0, 0);
+                if ((GridViewColumnHeader)RepTypeCol.Header == obj.Header)
+                    item.SetEveryColumnWidth(0, 0, 0, obj.Width, 0, 0, 0, 0);
+                if ((GridViewColumnHeader)ActNameCol.Header == obj.Header)
+                    item.SetEveryColumnWidth(0, 0, 0, 0, obj.Width, 0, 0, 0);
+                if ((GridViewColumnHeader)BgmCol.Header == obj.Header)
+                    item.SetEveryColumnWidth(0, 0, 0, 0, 0, obj.Width, 0, 0);
+                if ((GridViewColumnHeader)FileResCol.Header == obj.Header)
+                    item.SetEveryColumnWidth(0, 0, 0, 0, 0, 0, obj.Width, 0);
+                if ((GridViewColumnHeader)ProgTypeCol.Header == obj.Header)
+                    item.SetEveryColumnWidth(0, 0, 0, 0, 0, 0, 0, obj.Width);
+
+
+            }
+        }
 
         private void FindContent()
         {
@@ -360,14 +410,13 @@ namespace SmallTroupManager.View
             }
             return null;
         }
+
         /// <summary>
         /// 根据控件的Name获取控件对象
         /// </summary>
         /// <typeparam name="T">控件类型</typeparam>
         /// <param name="controlName">Name</param>
         /// <returns></returns>
-
-
         private int GetCurrentIndex(GetPositionDelegate getPosition)
         {
             int index = -1;

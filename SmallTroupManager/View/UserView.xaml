@@ -7,6 +7,7 @@
              xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
              xmlns:util="clr-namespace:ElCommon.Util;assembly=Util"
              xmlns:model="clr-namespace:SmallTroupManager.Model"
+             xmlns:listmgr ="clr-namespace:ListViewLayoutManagerLib;assembly=ListViewLayoutManagerLib"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="1700">
     <Control.Resources>
@@ -14,7 +15,8 @@
     </Control.Resources>
 
     <Grid>
-        <ListView ItemsSource="{Binding RelativeSource={RelativeSource AncestorType=local:UserView,AncestorLevel=1},Path=TargetItems}" 
+        <ListView listmgr:ListViewLayoutManager.Enabled="True"
+                  ItemsSource="{Binding RelativeSource={RelativeSource AncestorType=local:UserView,AncestorLevel=1},Path=TargetItems}" 
                   KeyDown="ListItemView_OnKeyDown"
                   MouseDoubleClick="ListItemView_OnMouseDoubleClick" 
                   MouseDown="ListItemView_OnMouseDown"
@@ -23,6 +25,7 @@
                   SelectedIndex="{Binding RelativeSource={RelativeSource Mode=FindAncestor,AncestorType=local:UserView},Path=CurSelectIndex,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
                   MouseMove="ListItemView_OnMouseMove"
                   Drop="ListItemView_OnDrop"
+                  
                   x:Name="ListItemView" FontSize="18" AllowDrop="True" Background="Transparent"
                   >
             <!--<ControlTemplate TargetType="{x:Type GridViewColumnHeader}">
@@ -81,8 +84,8 @@
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
-                    <GridViewColumn x:Name="OrderCol" Header="表演顺序" Width="180" CellTemplateSelector="{StaticResource OrderTemplate}"></GridViewColumn>
-                    <GridViewColumn x:Name="RepNameCol" Header="表演名称" Width="180" CellTemplateSelector="{StaticResource RepNameTemplate}"></GridViewColumn>
+                    <GridViewColumn listmgr:RangeColumn.MinWidth="50" x:Name="OrderCol" Header="表演顺序" Width="180" CellTemplateSelector="{StaticResource OrderTemplate}"></GridViewColumn>
+                    <GridViewColumn listmgr:RangeColumn.MinWidth="100" listmgr:RangeColumn.MaxWidth="200" x:Name="RepNameCol" Header="表演名称" Width="180" CellTemplateSelector="{StaticResource RepNameTemplate}"></GridViewColumn>
                     <GridViewColumn x:Name="RepTypeCol" Header="表演类型" Width="180" CellTemplateSelector="{StaticResource RepTypeTemplate}"></GridViewColumn>
                     <GridViewColumn x:Name="RepTimeCol" Header="表演时长" Width="180" CellTemplateSelector="{StaticResource RepTimeTemplate}"></GridViewColumn>
                     <GridViewColumn x:Name="ActNameCol" Header="表演者" Width="180" CellTemplateSelector="{StaticResource ActNameTemplate}"></GridViewColumn>

@@ -41,6 +41,9 @@
     <Reference Include="ErrorHandler">
       <HintPath>..\dll\ErrorHandler.dll</HintPath>
     </Reference>
+    <Reference Include="ListViewLayoutManagerLib">
+      <HintPath>..\ListViewLayoutManagerLib\debuglib\ListViewLayoutManagerLib.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
