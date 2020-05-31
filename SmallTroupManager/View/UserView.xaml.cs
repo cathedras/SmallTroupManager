@@ -23,7 +23,6 @@ using log4net;
 using SmallTroupManager.Annotations;
 using SmallTroupManager.Model;
 using SmallTroupManager.Resources;
-using Xceed.Wpf.AvalonDock.Controls;
 using ListViewLayoutManagerLib;
 
 namespace SmallTroupManager.View
