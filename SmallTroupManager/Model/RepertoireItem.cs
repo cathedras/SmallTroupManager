@@ -1,16 +1,16 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
 using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
 using ElCommon.Util;
 using SmallTroupManager.Annotations;
 
 namespace SmallTroupManager.Model
 {
+    /// <summary>
+    /// 属性声明的接口
+    /// </summary>
     public interface RepertoireBase
     {
         /// <summary>
@@ -55,7 +55,9 @@ namespace SmallTroupManager.Model
 
     }
 
-
+    /// <summary>
+    /// ListView中的Template中控件可得到属性
+    /// </summary>
     public class RepertoireItem : RepertoireBase, INotifyPropertyChanged
     {
         /// <summary>
@@ -85,6 +87,18 @@ namespace SmallTroupManager.Model
         private double _repBgmWidth;
         private double _fileResWidth;
         private double _progTypeWidth;
+
+        /// <summary>
+        /// 元素事件
+        /// </summary>
+        //private ICommand _textBoxEditCommand;
+        //public ICommand TextBoxEditCommand
+        //{
+        //    get => _textBoxEditCommand ?? (_textBoxEditCommand = new RelayCommand(() =>
+        //    {
+
+        //    }));
+        //}
 
         public RepertoireItem()
         {
@@ -120,6 +134,10 @@ namespace SmallTroupManager.Model
 
         #region Properties
 
+        //{
+        //    get;
+        //    set;
+        //}
 
         /// <summary>
         /// 表演顺序
@@ -352,6 +370,8 @@ namespace SmallTroupManager.Model
             }
         }
 
+      
+
         public event PropertyChangedEventHandler PropertyChanged;
 
         [NotifyPropertyChangedInvocator]
@@ -367,22 +387,22 @@ namespace SmallTroupManager.Model
         public void SetEveryColumnWidth(double orderWidth, double reqNameWidth, double repTimeWidth, double repTypeWidth,
             double actNameWidth, double repBgmWidth, double fileResWidth, double progTypeWidth)
         {
-            int noWidth = 0;
-            if (noWidth != orderWidth)
+            double noWidth = 0;
+            if (Math.Abs(noWidth - orderWidth) > 0)
                 OrderWidth = orderWidth;
-            if (noWidth != reqNameWidth)
+            if (Math.Abs(noWidth - reqNameWidth) > 0)
                 RepNameWidth = reqNameWidth;
-            if (noWidth != repTimeWidth)
+            if (Math.Abs(noWidth - repBgmWidth) > 0)
                 RepBgmWidth = repBgmWidth;
-            if (noWidth != repTimeWidth)
+            if (Math.Abs(noWidth - repTimeWidth) > 0)
                 RepTimeWidth = repTimeWidth;
-            if (noWidth != repTypeWidth)
+            if (Math.Abs(noWidth - repTypeWidth) > 0)
                 RepTypeWidth = repTypeWidth;
-            if (noWidth != actNameWidth)
+            if (Math.Abs(noWidth - actNameWidth) > 0)
                 ActNameWidth = actNameWidth;
-            if (noWidth != fileResWidth)
+            if (Math.Abs(noWidth - fileResWidth) > 0)
                 FileResWidth = fileResWidth;
-            if (noWidth != progTypeWidth)
+            if (Math.Abs(noWidth - progTypeWidth) > 0)
                 ProgTypeWidth = progTypeWidth;
         }
 
@@ -390,7 +410,33 @@ namespace SmallTroupManager.Model
 
     }
 
+    /// <summary>
+    /// ListView中的Template中的控件可绑定的事件或方法
+    /// </summary>
+    public partial class ResourceManager
+    {
+        
+        public void UIElement_OnFocusableChanged(object sender, DependencyPropertyChangedEventArgs e)
+        {
+            
+        }
 
+        public RoutedEvent FocusChange()
+        {
+            return null;
+        }
+
+        private void Edit_OnGotFocus(object sender, RoutedEventArgs e)
+        {
+            var txtb = sender as TextBox;
+            var n = txtb.Name;
+
+        }
+    }
+
+    /// <summary>
+    /// 存储的文件
+    /// </summary>
     public class SaveFileList : IXmlDbListObj
     {
         public int index;
@@ -476,6 +522,9 @@ namespace SmallTroupManager.Model
         public string UniKey => $"{index}";
     }
 
+    /// <summary>
+    /// 控件状态
+    /// </summary>
     public enum State
     {
         Edit,

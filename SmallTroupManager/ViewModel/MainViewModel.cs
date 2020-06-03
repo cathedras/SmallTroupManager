@@ -123,7 +123,7 @@ namespace SmallTroupManager.ViewModel
                     Filter = "STM|*.stm",
                 };
                 var fd = sfl.ShowDialog();
-                if (fd.HasValue)
+                if (fd.Value)
                 {
                     filePath = sfl.FileName;
                     var con = DocumentPaneView.Children.Select(item => item).Where(item => item.IsSelected);
@@ -196,8 +196,7 @@ namespace SmallTroupManager.ViewModel
                         var item = new RepertoireItem(va.Order, va.RepName, va.RepType, va.RepTime, va.ActName,
                             va.RepBgm, va.FileRes,
                             va.ProgType, (State)Enum.Parse(typeof(State), va.CurState)); //默认带播放按钮
-                        item.SetEveryColumnWidth(120, 180, 180, 180, 180, 180, 180, 180);
-                        uc.SetColWidth(120, 180, 180, 180, 180, 180, 180, 180);
+                        item.SetEveryColumnWidth(120, 160, 160, 160, 160, 160, 160, 160);
                         uc.TargetItems.Add(item);
                         idx++;
                     }
@@ -267,8 +266,7 @@ namespace SmallTroupManager.ViewModel
                     RepertoireItem curadd = null;
                     curadd = new RepertoireItem(id++, string.Empty, string.Empty, string.Empty, string.Empty, string.Empty, string.Empty, string.Empty,
                             State.Edit);
-                    curadd.SetEveryColumnWidth(120, 180, 180, 180, 180, 180, 180, 180);
-                    uc.SetColWidth(120, 180, 180, 180, 180, 180, 180, 180);
+                    curadd.SetEveryColumnWidth(120, 160, 160, 160, 160, 160, 160, 160);
                     uc.TargetItems.Add(curadd);//默认添加一个
                     var s = uc.TargetItems.Count;
                     uc.ListItemView.SelectedIndex = s - 1;

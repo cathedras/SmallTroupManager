@@ -57,7 +57,7 @@ namespace SmallTroupManager.ViewModel
             }
         }
 
-        public UserViewModel VModel
+        public UserViewModel UView
         {
             get
             {

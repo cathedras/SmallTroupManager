@@ -8,6 +8,9 @@ using System.Windows.Media;
 
 namespace ListViewLayoutManagerLib
 {
+    /// <summary>
+    /// ListView的管理程序，可自定义管理的属性类，
+    /// </summary>
     public class ListViewLayoutManager
     {
 

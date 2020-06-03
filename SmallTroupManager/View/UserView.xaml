@@ -25,19 +25,20 @@
                   SelectedIndex="{Binding RelativeSource={RelativeSource Mode=FindAncestor,AncestorType=local:UserView},Path=CurSelectIndex,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
                   MouseMove="ListItemView_OnMouseMove"
                   Drop="ListItemView_OnDrop"
-                  
                   x:Name="ListItemView" FontSize="18" AllowDrop="True" Background="Transparent"
                   >
             <!--<ControlTemplate TargetType="{x:Type GridViewColumnHeader}">
                 <ControlTemplate.Triggers>
                     <Trigger Property="IsPressed"
                              Value="true">
-                        --><!--<Setter TargetName="HighlightBorder"
+                        -->
+            <!--<Setter TargetName="HighlightBorder"
                                 Property="Visibility"
                                 Value="Hidden"/>
                         <Setter TargetName="PART_HeaderGripper"
                                 Property="Visibility"
-                                Value="Hidden"/>--><!--
+                                Value="Hidden"/>-->
+            <!--
                         <Setter Property="Background"
                                 Value="SkyBlue"/>
                         <Setter Property="Foreground"
@@ -46,9 +47,11 @@
 
                     <Trigger Property="Role"
                              Value="Floating">
-                        --><!--<Setter TargetName="PART_HeaderGripper"
+                        -->
+            <!--<Setter TargetName="PART_HeaderGripper"
                                 Property="Visibility"
-                                Value="Collapsed"/>--><!--
+                                Value="Collapsed"/>-->
+            <!--
                         <Setter Property="Background"
                                 Value="Yellow"/>
                         <Setter Property="Foreground"
@@ -61,7 +64,8 @@
             MouseDoubleClick="ListItemView_OnMouseDoubleClick" MouseDown="ListItemView_OnMouseDown"-->
             <!--<i:Interaction.Triggers>
                 <i:EventTrigger EventName="MouseDoubleClick">
-                    <util:ExInvokeCommandAction Command="{Binding Source={StaticResource Locator},Path=VModel.SelectCommand}" CommandParameter="{Binding ElementName=ListItemView,Path=SelectedItem}"></util:ExInvokeCommandAction>--><!----><!--
+                    <util:ExInvokeCommandAction Command="{Binding Source={StaticResource Locator},Path=VModel.SelectCommand}" CommandParameter="{Binding ElementName=ListItemView,Path=SelectedItem}"></util:ExInvokeCommandAction>-->
+            <!----><!--
                 </i:EventTrigger>
                 <i:EventTrigger EventName="KeyDown">
                     <util:ExInvokeCommandAction Command="{Binding Source={StaticResource Locator},Path=VModel.KeyCommand}" CommandParameter="{Binding ElementName=ListItemView,Path=SelectedItem}"></util:ExInvokeCommandAction>
@@ -69,7 +73,7 @@
             </i:Interaction.Triggers>-->
             <ListView.View>
                 <GridView>
-                    <GridViewColumn Header="操作" Width="150">
+                    <GridViewColumn Header="操作" listmgr:RangeColumn.MinWidth="120" listmgr:RangeColumn.MaxWidth="120">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate DataType="{x:Type model:RepertoireItem}">
                                 <WrapPanel>
@@ -84,17 +88,16 @@
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
-                    <GridViewColumn listmgr:RangeColumn.MinWidth="50" x:Name="OrderCol" Header="表演顺序" Width="180" CellTemplateSelector="{StaticResource OrderTemplate}"></GridViewColumn>
-                    <GridViewColumn listmgr:RangeColumn.MinWidth="100" listmgr:RangeColumn.MaxWidth="200" x:Name="RepNameCol" Header="表演名称" Width="180" CellTemplateSelector="{StaticResource RepNameTemplate}"></GridViewColumn>
-                    <GridViewColumn x:Name="RepTypeCol" Header="表演类型" Width="180" CellTemplateSelector="{StaticResource RepTypeTemplate}"></GridViewColumn>
-                    <GridViewColumn x:Name="RepTimeCol" Header="表演时长" Width="180" CellTemplateSelector="{StaticResource RepTimeTemplate}"></GridViewColumn>
-                    <GridViewColumn x:Name="ActNameCol" Header="表演者" Width="180" CellTemplateSelector="{StaticResource ActNameTemplate}"></GridViewColumn>
-                    <GridViewColumn x:Name="BgmCol" Header="背景音乐" Width="180" CellTemplateSelector="{StaticResource RepBgmTemplate}"></GridViewColumn>
-                    <GridViewColumn x:Name="FileResCol" Header="资源地址" Width="180" CellTemplateSelector="{StaticResource FileResTemplate}"></GridViewColumn>
-                    <GridViewColumn x:Name="ProgTypeCol" Header="资源播放程序" Width="150" CellTemplateSelector="{StaticResource ProgTypeTemplate}"></GridViewColumn>
+                    <GridViewColumn listmgr:RangeColumn.MinWidth="120" listmgr:RangeColumn.MaxWidth="200" x:Name="OrderCol" Header="表演顺序" CellTemplateSelector="{StaticResource OrderTemplate}"></GridViewColumn>
+                    <GridViewColumn listmgr:RangeColumn.MinWidth="160" listmgr:RangeColumn.MaxWidth="400" x:Name="RepNameCol" Header="表演名称"  CellTemplateSelector="{StaticResource RepNameTemplate}"></GridViewColumn>
+                    <GridViewColumn listmgr:RangeColumn.MinWidth="160" listmgr:RangeColumn.MaxWidth="400" x:Name="RepTypeCol" Header="表演类型" CellTemplateSelector="{StaticResource RepTypeTemplate}"></GridViewColumn>
+                    <GridViewColumn listmgr:RangeColumn.MinWidth="160" listmgr:RangeColumn.MaxWidth="400" x:Name="RepTimeCol" Header="表演时长" CellTemplateSelector="{StaticResource RepTimeTemplate}"></GridViewColumn>
+                    <GridViewColumn listmgr:RangeColumn.MinWidth="160" listmgr:RangeColumn.MaxWidth="400" x:Name="ActNameCol" Header="表演者" CellTemplateSelector="{StaticResource ActNameTemplate}"></GridViewColumn>
+                    <GridViewColumn listmgr:RangeColumn.MinWidth="160" listmgr:RangeColumn.MaxWidth="400" x:Name="BgmCol" Header="背景音乐" CellTemplateSelector="{StaticResource RepBgmTemplate}"></GridViewColumn>
+                    <GridViewColumn listmgr:RangeColumn.MinWidth="160" x:Name="FileResCol" Header="资源地址"  CellTemplateSelector="{StaticResource FileResTemplate}"></GridViewColumn>
+                    <GridViewColumn listmgr:RangeColumn.MinWidth="160" listmgr:RangeColumn.MaxWidth="400" x:Name="ProgTypeCol" Header="资源播放程序" CellTemplateSelector="{StaticResource ProgTypeTemplate}"></GridViewColumn>
                 </GridView>
             </ListView.View>
-
         </ListView>
     </Grid>
 </UserControl>

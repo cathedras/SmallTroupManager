@@ -10,6 +10,7 @@ using System.Windows.Input;
 using ElCommon.Util;
 using GalaSoft.MvvmLight.CommandWpf;
 using Microsoft.Win32;
+using System.Windows;
 
 namespace SmallTroupManager.ViewModel
 {
@@ -20,6 +21,18 @@ namespace SmallTroupManager.ViewModel
         {
             
         }
+
+        //public void UIElement_OnFocusableChanged(object sender, DependencyPropertyChangedEventArgs e)
+        //{
+            
+        //}
+
+        //public void FocusChange()
+        //{
+
+        //}
+
+
         private ICommand _saveFileCommand;
         public ICommand SaveFileCommand
         {

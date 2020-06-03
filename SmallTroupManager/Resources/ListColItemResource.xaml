@@ -1,7 +1,9 @@
-﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+﻿<ResourceDictionary x:Class="SmallTroupManager.Model.ResourceManager"
+                    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:local="clr-namespace:SmallTroupManager.Resources"
-                    xmlns:model="clr-namespace:SmallTroupManager.Model">
+                    xmlns:model="clr-namespace:SmallTroupManager.Model"
+                    >
     <local:ListColTemp x:Key="OrderTemplate">
         <local:ListColTemp.EditTemplate>
             <DataTemplate  DataType="{x:Type model:RepertoireItem}">
@@ -17,7 +19,7 @@
     <local:ListColTemp x:Key="RepNameTemplate">
         <local:ListColTemp.EditTemplate>
             <DataTemplate  DataType="{x:Type model:RepertoireItem}">
-                <TextBox x:Name="RepNameEdit" Text="{Binding RepName}" Height="25"  Width="{Binding RepNameWidth}" Focusable="True" ForceCursor="True"></TextBox>
+                <TextBox x:Name="RepNameEdit" Text="{Binding RepName}" Height="25"  Width="{Binding RepNameWidth}" GotFocus="Edit_OnGotFocus"></TextBox>
             </DataTemplate>
         </local:ListColTemp.EditTemplate>
         <local:ListColTemp.ShowTemplate>
@@ -29,7 +31,7 @@
     <local:ListColTemp x:Key="RepTypeTemplate">
         <local:ListColTemp.EditTemplate>
             <DataTemplate  DataType="{x:Type model:RepertoireItem}">
-                <TextBox x:Name="RepTypeEdit" Text="{Binding RepType}" Height="25"  Width="{Binding RepTypeWidth}"></TextBox>
+                <TextBox x:Name="RepTypeEdit" Text="{Binding RepType}" Height="25"  Width="{Binding RepTypeWidth}" GotFocus="Edit_OnGotFocus"></TextBox>
             </DataTemplate>
         </local:ListColTemp.EditTemplate>
         <local:ListColTemp.ShowTemplate>
@@ -41,7 +43,7 @@
     <local:ListColTemp x:Key="RepTimeTemplate">
         <local:ListColTemp.EditTemplate>
             <DataTemplate  DataType="{x:Type model:RepertoireItem}">
-                <TextBox x:Name="RepTimeEdit" Text="{Binding RepTime}" Height="25"  Width="{Binding RepTimeWidth}"></TextBox>
+                <TextBox x:Name="RepTimeEdit" Text="{Binding RepTime}" Height="25"  Width="{Binding RepTimeWidth}" GotFocus="Edit_OnGotFocus"></TextBox>
             </DataTemplate>
         </local:ListColTemp.EditTemplate>
         <local:ListColTemp.ShowTemplate>
@@ -53,7 +55,7 @@
     <local:ListColTemp x:Key="ActNameTemplate">
         <local:ListColTemp.EditTemplate>
             <DataTemplate  DataType="{x:Type model:RepertoireItem}">
-                <TextBox x:Name="ActNameEdit" Text="{Binding ActName}" Height="25"  Width="{Binding ActNameWidth}"></TextBox>
+                <TextBox x:Name="ActNameEdit" Text="{Binding ActName}" Height="25"  Width="{Binding ActNameWidth}" GotFocus="Edit_OnGotFocus"></TextBox>
             </DataTemplate>
         </local:ListColTemp.EditTemplate>
         <local:ListColTemp.ShowTemplate>
@@ -65,7 +67,7 @@
     <local:ListColTemp x:Key="RepBgmTemplate">
         <local:ListColTemp.EditTemplate>
             <DataTemplate  DataType="{x:Type model:RepertoireItem}">
-                <TextBox x:Name="RepBgmEdit" Text="{Binding RepBgm}" Height="25"  Width="{Binding RepBgmWidth}"></TextBox>
+                <TextBox x:Name="RepBgmEdit" Text="{Binding RepBgm}" Height="25"  Width="{Binding RepBgmWidth}" GotFocus="Edit_OnGotFocus"></TextBox>
             </DataTemplate>
         </local:ListColTemp.EditTemplate>
         <local:ListColTemp.ShowTemplate>
@@ -77,7 +79,7 @@
     <local:ListColTemp x:Key="FileResTemplate">
         <local:ListColTemp.EditTemplate>
             <DataTemplate  DataType="{x:Type model:RepertoireItem}">
-                <TextBox x:Name="FileResEdit" Text="{Binding FileRes}" Height="25"  Width="{Binding FileResWidth}"></TextBox>
+                <TextBox x:Name="FileResEdit" Text="{Binding FileRes}" Height="25"  Width="{Binding FileResWidth}" GotFocus="Edit_OnGotFocus"></TextBox>
             </DataTemplate>
         </local:ListColTemp.EditTemplate>
         <local:ListColTemp.ShowTemplate>
@@ -89,7 +91,7 @@
     <local:ListColTemp x:Key="ProgTypeTemplate">
         <local:ListColTemp.EditTemplate>
             <DataTemplate  DataType="{x:Type model:RepertoireItem}">
-                <TextBox x:Name="ProgTypeEdit" Text="{Binding ProgType}" Height="25"  Width="{Binding ProgTypeWidth}"></TextBox>
+                <TextBox x:Name="ProgTypeEdit" Text="{Binding ProgType}" Height="25"  Width="{Binding ProgTypeWidth}" GotFocus="Edit_OnGotFocus"></TextBox>
             </DataTemplate>
         </local:ListColTemp.EditTemplate>
         <local:ListColTemp.ShowTemplate>

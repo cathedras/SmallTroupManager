@@ -25,4 +25,27 @@ namespace SmallTroupManager.Resources
            
         }
     }
+
+    public class ListColTemplateManager
+    {
+        public static readonly DependencyProperty EnabledProperty = DependencyProperty.RegisterAttached(
+            "Enabled",
+            typeof(bool),
+            typeof(ListColTemplateManager),
+            new FrameworkPropertyMetadata(new PropertyChangedCallback(OnLayoutManagerEnabledChanged)));
+
+
+        private static void OnLayoutManagerEnabledChanged(DependencyObject dependencyObject, DependencyPropertyChangedEventArgs e)
+        {
+            ListView listView = dependencyObject as ListView;
+            if (listView != null)
+            {
+                bool enabled = (bool)e.NewValue;
+                if (enabled)
+                {
+                    
+                }
+            }
+        }
+    }
 }

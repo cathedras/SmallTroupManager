@@ -1,28 +1,18 @@
 ﻿using System;
 using System.Collections;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
-using System.Reflection;
 using System.Runtime.CompilerServices;
-using System.Security.RightsManagement;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using log4net;
 using SmallTroupManager.Annotations;
 using SmallTroupManager.Model;
-using SmallTroupManager.Resources;
 using ListViewLayoutManagerLib;
 
 namespace SmallTroupManager.View
@@ -151,8 +141,7 @@ namespace SmallTroupManager.View
                     var item = new RepertoireItem(LastEditIndex++, string.Empty, string.Empty, string.Empty,
                         string.Empty,
                         string.Empty, string.Empty, string.Empty, State.Edit);
-                    item.SetEveryColumnWidth(120, 180, 180, 180, 180, 180, 180, 180);
-                    SetColWidth(120, 180, 180, 180, 180, 180, 180, 180);
+                    item.SetEveryColumnWidth(120, 160, 160, 160, 160, 160, 160, 160);
                     TargetItems.Add(item);
 
                 }
@@ -266,7 +255,6 @@ namespace SmallTroupManager.View
                     }
                 }
             }
-
         }
 
         /// <summary>
@@ -327,45 +315,31 @@ namespace SmallTroupManager.View
 
         #region PublicFunction
 
-
-        public void SetColWidth(int orderWidth, int reqNameWidth, int repTimeWidth, int repTypeWidth, int actNameWidth, int repBgmWidth, int fileResWidth, int progTypeWidth)
-        {
-            OrderCol.Width = orderWidth;
-            RepNameCol.Width = reqNameWidth;
-            RepTimeCol.Width = repTimeWidth;
-            RepTypeCol.Width = repTypeWidth;
-            ActNameCol.Width = actNameWidth;
-            BgmCol.Width = repBgmWidth;
-            FileResCol.Width = fileResWidth;
-            ProgTypeCol.Width = progTypeWidth;
-        }
-
         #endregion
 
         #region PrivateFunction
 
         private void ReAction(GridViewColumn obj)
         {
+            var width = obj.Width - 12;
             foreach (var item in TargetItems)
             {
-                if ((GridViewColumnHeader)OrderCol.Header == obj.Header)
-                    item.SetEveryColumnWidth(obj.Width, 0, 0, 0, 0, 0, 0, 0);
-                if((GridViewColumnHeader)RepNameCol.Header == obj.Header)
-                    item.SetEveryColumnWidth(0, obj.Width, 0, 0, 0, 0, 0, 0);
-                if ((GridViewColumnHeader)RepTimeCol.Header == obj.Header)
-                    item.SetEveryColumnWidth(0, 0, obj.Width, 0, 0, 0, 0, 0);
-                if ((GridViewColumnHeader)RepTypeCol.Header == obj.Header)
-                    item.SetEveryColumnWidth(0, 0, 0, obj.Width, 0, 0, 0, 0);
-                if ((GridViewColumnHeader)ActNameCol.Header == obj.Header)
-                    item.SetEveryColumnWidth(0, 0, 0, 0, obj.Width, 0, 0, 0);
-                if ((GridViewColumnHeader)BgmCol.Header == obj.Header)
-                    item.SetEveryColumnWidth(0, 0, 0, 0, 0, obj.Width, 0, 0);
-                if ((GridViewColumnHeader)FileResCol.Header == obj.Header)
-                    item.SetEveryColumnWidth(0, 0, 0, 0, 0, 0, obj.Width, 0);
-                if ((GridViewColumnHeader)ProgTypeCol.Header == obj.Header)
-                    item.SetEveryColumnWidth(0, 0, 0, 0, 0, 0, 0, obj.Width);
-
-
+                if (OrderCol.Header.ToString().Equals(obj.Header.ToString()))
+                    item.SetEveryColumnWidth(width, 0, 0, 0, 0, 0, 0, 0);
+                if(RepNameCol.Header.ToString().Equals(obj.Header.ToString()))
+                    item.SetEveryColumnWidth(0, width, 0, 0, 0, 0, 0, 0);
+                if (RepTimeCol.Header.ToString().Equals(obj.Header.ToString()))
+                    item.SetEveryColumnWidth(0, 0, width, 0, 0, 0, 0, 0);
+                if (RepTypeCol.Header.ToString().Equals(obj.Header.ToString()))
+                    item.SetEveryColumnWidth(0, 0, 0, width, 0, 0, 0, 0);
+                if (ActNameCol.Header.ToString().Equals(obj.Header.ToString()))
+                    item.SetEveryColumnWidth(0, 0, 0, 0, width, 0, 0, 0);
+                if (BgmCol.Header.ToString() == obj.Header.ToString())
+                    item.SetEveryColumnWidth(0, 0, 0, 0, 0, width, 0, 0);
+                if (FileResCol.Header.ToString().Equals(obj.Header.ToString()))
+                    item.SetEveryColumnWidth(0, 0, 0, 0, 0, 0, width, 0);
+                if (ProgTypeCol.Header.ToString().Equals(obj.Header.ToString()))
+                    item.SetEveryColumnWidth(0, 0, 0, 0, 0, 0, 0, width);
             }
         }
 
