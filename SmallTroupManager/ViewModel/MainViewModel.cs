@@ -61,14 +61,20 @@ namespace SmallTroupManager.ViewModel
             _log.Debug("应用程序启动！");
             //_gbl = new Gbl();
             //_gbl.LoadGbl<Gbl>("SMT.ini");
-            ////if (IsInDesignMode)
-            ////{
-            ////    // Code runs in Blend --> create design time data.
-            ////}
-            ////else
-            ////{
-            ////    // Code runs "for real"
-            ////}
+            if (IsInDesignMode)
+            {
+                Console.WriteLine("111");
+                // Code runs in Blend --> create design time data.
+            }
+            else
+            {
+                Console.WriteLine("012");
+                Console.WriteLine("022");
+                Console.WriteLine("092");
+                Console.WriteLine("022");
+                Console.WriteLine("028");
+                // Code runs "for real"https://developercommunity.visualstudio.com/users/213515/eeecd4e9-3255-6bfb-a5c1-fece984f23ed.html
+            }
             ///
 
         }
@@ -220,6 +226,9 @@ namespace SmallTroupManager.ViewModel
 
 
         #region  MainMenuCmd
+        /// <summary>
+        /// 打开文件
+        /// </summary>
         private ICommand _openFileCommand;
         public ICommand OpenFileCommand
         {
@@ -234,7 +243,9 @@ namespace SmallTroupManager.ViewModel
                 //},"test");
             }));
         }
-
+        /// <summary>
+        /// 关闭程序
+        /// </summary>
         private ICommand _closeCommand;
         public ICommand CloseCommand
         {
@@ -244,6 +255,9 @@ namespace SmallTroupManager.ViewModel
             }));
         }
 
+        /// <summary>
+        /// 保存文件
+        /// </summary>
         private ICommand _saveFileCommand;
         public ICommand SaveFileCommand
         {
@@ -254,7 +268,9 @@ namespace SmallTroupManager.ViewModel
             }));
         }
 
-
+        /// <summary>
+        /// 创建新窗口
+        /// </summary>
         private ICommand _newActionCommand;
         public ICommand NewActionCommand
         {
@@ -275,6 +291,9 @@ namespace SmallTroupManager.ViewModel
             }));
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         private ICommand _addActionCommand;
         public ICommand AddActionCommand
         {
@@ -284,6 +303,9 @@ namespace SmallTroupManager.ViewModel
             }));
         }
 
+        /// <summary>
+        /// 打开外部程序
+        /// </summary>
         private ICommand _openExeCommand;
         public ICommand OpenExeCommand
         {
@@ -312,6 +334,9 @@ namespace SmallTroupManager.ViewModel
 
         }
 
+        /// <summary>
+        /// 打开设置窗口
+        /// </summary>
         private ICommand _openSettingWindowCommand;
         public ICommand OpenSettingWindowCommand
         {
@@ -325,6 +350,9 @@ namespace SmallTroupManager.ViewModel
 
         }
 
+        /// <summary>
+        /// 本地音乐播放器
+        /// </summary>
         private ICommand _localMusicWin;
         public ICommand LocalMusicWinCommand
         {

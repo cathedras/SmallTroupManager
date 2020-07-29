@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Windows;
+using SmallTroupManager.Window;
 using MediaPlayer = VisioForge.Controls.UI.WPF.MediaPlayer;
 
 
@@ -8,7 +9,7 @@ namespace SmallTroupManager.View
     /// <summary>
     /// PlayMusicWin.xaml 的交互逻辑
     /// </summary>
-    public partial class PlayMusicWin : Window
+    public partial class PlayMusicWin : WindowBase
     {
         public PlayMusicWin()
         {

@@ -1,15 +1,15 @@
-﻿<Window x:Class="SmallTroupManager.View.PlayMusicWin"
+﻿<wind:WindowBase x:Class="SmallTroupManager.View.PlayMusicWin"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SmallTroupManager.View"
         xmlns:video="clr-namespace:VisioForge.Controls.UI.WPF;assembly=VisioForge.Controls.UI"
+        xmlns:wind="clr-namespace:SmallTroupManager.Window"
         xmlns:vlc="clr-namespace:Vlc.DotNet.Wpf;assembly=Vlc.DotNet.Wpf"
         mc:Ignorable="d"
         Title="PlayMusicWin" Height="450" Width="800"
-        Closed="PlayMusicWin_OnClosed"
-        >
+        Closed="PlayMusicWin_OnClosed">
     <!-->-->
     <Grid>
         <Grid.ColumnDefinitions>
@@ -38,4 +38,4 @@
             </ListView.View>
         </ListView>
     </Grid>
-</Window>
+</wind:WindowBase>
