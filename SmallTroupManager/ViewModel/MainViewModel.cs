@@ -7,16 +7,19 @@ using System.Linq;
 using System.Security;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Forms;
 using System.Windows.Input;
 using ElCommon.Util;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.CommandWpf;
 using log4net;
-using Microsoft.Win32;
 using SmallTroupManager.Model;
 using SmallTroupManager.Utils;
 using SmallTroupManager.View;
 using Xceed.Wpf.AvalonDock.Layout;
+using OpenFileDialog = Microsoft.Win32.OpenFileDialog;
+using SaveFileDialog = Microsoft.Win32.SaveFileDialog;
+
 //using System.Reflection;
 
 namespace SmallTroupManager.ViewModel
@@ -364,6 +367,34 @@ namespace SmallTroupManager.ViewModel
                 return true;
             }));
 
+        }
+       
+
+        private ICommand _fileManager;
+        public ICommand FileManager
+        {
+            get => _fileManager ?? (_fileManager = new UtilRelayCommand(delegate (object obj)
+            {
+                var dialog = new System.Windows.Forms.FolderBrowserDialog();
+                dialog.ShowNewFolderButton = true;
+                var res = dialog.ShowDialog();
+                if (res == DialogResult.OK)
+                {
+                    //var fileManager = new DirectoryInfo(dialog.SelectedPath);
+                    foreach (var srcFile in Directory.GetFiles(dialog.SelectedPath))
+                    {
+                        var desFile = srcFile.Substring(0, srcFile.LastIndexOf('.'))+".dcm";
+                        if (!File.Exists(desFile))
+                        {
+                            File.Move(srcFile, desFile);
+                        }
+                    }
+                }
+                
+            }, pre =>
+            {
+                return true;
+            }));
         }
 
         #endregion

@@ -76,6 +76,7 @@
                     <MenuItem Header="谷歌浏览器"></MenuItem>
                     <MenuItem Header="Windows Edge"></MenuItem>
                 </MenuItem>
+                <MenuItem Header="文件管理工具" Command="{Binding Source={StaticResource Locator},Path=Main.FileManager}"></MenuItem>
             </MenuItem>
             <MenuItem Header="设置" Width="70">
                 <MenuItem Header="程序设置" Command="{Binding Source={StaticResource Locator}}"></MenuItem>
